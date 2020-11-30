@@ -32,3 +32,5 @@ class Army:
     @battalions.setter
     def battalions(self, value):
         self.battalions = value
+
+        
