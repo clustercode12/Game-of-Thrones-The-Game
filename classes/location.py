@@ -1,0 +1,7 @@
+KINGS_LANDING = "King's Landing"
+WINTERFELL = "Winterfell"
+THE_WALL = "The Wall"
+STORMS_END = "Storm's End"
+RIVERRUN = "River Run"
+CASTERLYROCK = "CasterlyRock"
+SUNSPEAR = "Sunspear"
