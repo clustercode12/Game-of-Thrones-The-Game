@@ -33,7 +33,7 @@ class Army:
         2: {
             N_BATTALIONS: 1,
             TYPE_SOLDIERS: Soldier.DRAGON,
-            N_SOLDIERS: 0,
+            N_SOLDIERS: 1,
             LOCATION: None,
             GENERAL: None, 
             DRAGON_TYPE: Dragon.RHAEGAL
@@ -41,7 +41,7 @@ class Army:
         3: {
             N_BATTALIONS: 1,
             TYPE_SOLDIERS: Soldier.DRAGON,
-            N_SOLDIERS: 0,
+            N_SOLDIERS: 1,
             LOCATION: None,
             GENERAL: None, 
             DRAGON_TYPE: Dragon.VISERION
@@ -49,7 +49,7 @@ class Army:
         4: {
             N_BATTALIONS: 1,
             TYPE_SOLDIERS: Soldier.DRAGON,
-            N_SOLDIERS: 0,
+            N_SOLDIERS: 1,
             LOCATION: None,
             GENERAL: None, 
             DRAGON_TYPE: Dragon.DROGON
@@ -93,13 +93,14 @@ class Army:
         for i in range(len(armyDicctionary)):
             bGroup = armyDicctionary[i] # Battalion Group
 
-            self.addBattalionGroup(bGroup[self.N_BATTALIONS], bGroup[self.TYPE_SOLDIERS], bGroup[self.N_SOLDIERS], bGroup[self.LOCATION], bGroup[self.GENERAL], bGroup[self.DRAGON_TYPE])
+            self.addBattalionGroup(bGroup[self.N_BATTALIONS], bGroup[self.TYPE_SOLDIERS], bGroup[self.N_SOLDIERS], 
+                bGroup[self.LOCATION], bGroup[self.GENERAL], bGroup[self.DRAGON_TYPE])
 
     def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
         battalionGroup = []
         
         for _ in range(nBattalions):
-            battalionGroup.append(Battalion(typeSoldiers, nSoldiers))
+            battalionGroup.append(Battalion(typeSoldiers, nSoldiers, dragonType = dragonType))
 
         self.appendBattalionGroup(battalionGroup)
 
@@ -113,7 +114,3 @@ class Army:
     @battalions.setter
     def battalions(self, value):
         self.__battalions = value
-
-
-army = Army(Army.WESTEROS)
-print(army)

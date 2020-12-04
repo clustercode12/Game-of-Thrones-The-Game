@@ -12,4 +12,4 @@ class Archer(Soldier):
     MIN_STRENGTH = 10
 
     def __init__(self):
-        super().__init__(self.MIN_STRENGTH, self.MAX_STRENGTH)
+        super().__init__(self.MIN_STRENGTH, self.MAX_STRENGTH, Soldier.ARCHER)

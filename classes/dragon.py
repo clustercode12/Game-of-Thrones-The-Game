@@ -9,7 +9,7 @@ class Dragon(Soldier):
     def __init__(self, dragonType):
         STRENGTH = self.getStrength(dragonType)
 
-        super().__init__(STRENGTH, STRENGTH)
+        super().__init__(STRENGTH, STRENGTH, dragonType)
 
     def getStrength(self, dragonType):
         if dragonType == self.RHAEGAL: return 4000

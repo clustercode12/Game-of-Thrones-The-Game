@@ -12,7 +12,7 @@ class General(Soldier):
     def __init__(self, generalType):
         STRENGTH = self.getStrength(generalType)
 
-        super().__init__(STRENGTH, STRENGTH)
+        super().__init__(STRENGTH, STRENGTH, generalType)
 
     def getStrength(self, generalType):
         if generalType == self.TYWIN or generalType == self.STANNIS: return 300
@@ -21,3 +21,5 @@ class General(Soldier):
         elif generalType == self.TYRION: return 150
         elif generalType == self.QUEEN or generalType == self.UNDEAD_KING: return 500
         else: return 0
+
+    
