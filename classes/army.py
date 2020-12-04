@@ -1,5 +1,6 @@
 from battalion import Battalion
-from armyTargeryen import TARGERYEN_ARMY
+from soldier import Soldier
+from dragon import Dragon
 
 class Army:
     TARGARYEN = "Targaryen"
@@ -12,8 +13,82 @@ class Army:
     GENERAL = "general"
     DRAGON_TYPE = "dragonType"
 
-    def __init__(self, armyDicctionary):
+    WESTEROS_ARMY = {
+        0: {
+            N_BATTALIONS: 20,
+            TYPE_SOLDIERS: Soldier.HUMAN_SOLDIER,
+            N_SOLDIERS: 100,
+            LOCATION: None,
+            GENERAL: None, 
+            DRAGON_TYPE: None
+        },
+        1: {
+            N_BATTALIONS: 10,
+            TYPE_SOLDIERS: Soldier.ARCHER,
+            N_SOLDIERS: 100,
+            LOCATION: None,
+            GENERAL: None, 
+            DRAGON_TYPE: None
+        },
+        2: {
+            N_BATTALIONS: 1,
+            TYPE_SOLDIERS: Soldier.DRAGON,
+            N_SOLDIERS: 0,
+            LOCATION: None,
+            GENERAL: None, 
+            DRAGON_TYPE: Dragon.RHAEGAL
+        },
+        3: {
+            N_BATTALIONS: 1,
+            TYPE_SOLDIERS: Soldier.DRAGON,
+            N_SOLDIERS: 0,
+            LOCATION: None,
+            GENERAL: None, 
+            DRAGON_TYPE: Dragon.VISERION
+        },
+        4: {
+            N_BATTALIONS: 1,
+            TYPE_SOLDIERS: Soldier.DRAGON,
+            N_SOLDIERS: 0,
+            LOCATION: None,
+            GENERAL: None, 
+            DRAGON_TYPE: Dragon.DROGON
+        }
+    }
+
+    TARGARYEN_ARMY = {
+        0: {
+            N_BATTALIONS: 20,
+            TYPE_SOLDIERS: Soldier.HUMAN_SOLDIER,
+            N_SOLDIERS: 100,
+            LOCATION: None,
+            GENERAL: None, 
+            DRAGON_TYPE: None
+        },
+        1: {
+            N_BATTALIONS: 10,
+            TYPE_SOLDIERS: Soldier.ARCHER,
+            N_SOLDIERS: 100,
+            LOCATION: None,
+            GENERAL: None, 
+            DRAGON_TYPE: None
+        },
+        2: {
+            N_BATTALIONS: 5,
+            TYPE_SOLDIERS: Soldier.UNDEAD_SOLDIER,
+            N_SOLDIERS: 100,
+            LOCATION: None,
+            GENERAL: None, 
+            DRAGON_TYPE: None
+        }
+    }
+
+    def __init__(self, armyType):
         self.__battalions = []
+
+        if armyType == self.TARGARYEN: armyDicctionary = self.TARGARYEN_ARMY
+        elif armyType == self.WESTEROS: armyDicctionary = self.WESTEROS_ARMY
+        else: armyDicctionary = None
 
         for i in range(len(armyDicctionary)):
             bGroup = armyDicctionary[i] # Battalion Group
@@ -39,4 +114,6 @@ class Army:
     def battalions(self, value):
         self.__battalions = value
 
-army = Army(TARGERYEN_ARMY)
+
+army = Army(Army.WESTEROS)
+print(army)
