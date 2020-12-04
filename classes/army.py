@@ -3,9 +3,6 @@ from soldier import Soldier
 from dragon import Dragon
 
 class Army:
-    TARGARYEN = "Targaryen"
-    WESTEROS = "Westeros"
-
     N_BATTALIONS = "nBattalions"
     TYPE_SOLDIERS = "typeSoldiers"
     N_SOLDIERS = "nSoldiers"
@@ -83,12 +80,8 @@ class Army:
         }
     }
 
-    def __init__(self, armyType):
+    def __init__(self, armyDicctionary):
         self.__battalions = []
-
-        if armyType == self.TARGARYEN: armyDicctionary = self.TARGARYEN_ARMY
-        elif armyType == self.WESTEROS: armyDicctionary = self.WESTEROS_ARMY
-        else: armyDicctionary = None
 
         for i in range(len(armyDicctionary)):
             bGroup = armyDicctionary[i] # Battalion Group
