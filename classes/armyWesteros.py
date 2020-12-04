@@ -42,5 +42,3 @@ TARGERYEN_WESTEROS = {
         DRAGON_TYPE: DROGON
     }
 }
-
-

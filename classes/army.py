@@ -14,16 +14,21 @@ class Army:
     def __init__(self, armyDicctionary):
         self.__battalions = []
 
-    def addBattalionsSameType(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
-        battalions = []
+        for i in range(len(armyDicctionary)):
+            bGroup = armyDicctionary[i] # Battalion Group
+
+            self.addBattalionGroup(bGroup[N_BATTALIONS], bGroup[TYPE_SOLDIERS], bGroup[N_SOLDIERS], bGroup[LOCATION], bGroup[GENERAL], bGroup[DRAGON_TYPE])
+
+    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
+        battalionGroup = []
         
         for _ in range(nBattalions):
-            battalions.append(Battalion(typeSoldiers, nSoldiers))
+            battalionGroup.append(Battalion(typeSoldiers, nSoldiers))
 
-        self.appendBattalions(battalions)
+        self.appendBattalionGroup(battalionGroup)
 
-    def appendBattalions(self, battalions):
-        self.__battalions.append(battalions)
+    def appendBattalionGroup(self, battalionGroup):
+        self.__battalions.append(battalionGroup)
 
     @property
     def battalions(self):
