@@ -1,8 +1,8 @@
 from soldier import *
 from archer import Archer
-from dragon import Dragon
-from humanSoldier import HumanSoldier
-from undeadSoldier import UndeadSoldier
+from dragon import *
+from soldierHuman import HumanSoldier
+from soldierUndead import UndeadSoldier
 
 class Battalion():
     def __init__(self, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):

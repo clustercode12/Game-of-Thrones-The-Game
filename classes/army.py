@@ -3,36 +3,34 @@ from battalion import *
 TARGARYEN = "Targaryen"
 WESTEROS = "Westeros"
 
-class Army:
-    def __init__(self, armyType):
-        self.__armyType = armyType
-        self.__battalions = self.createBattalions(1, DRAGON, 1)
+N_BATTALIONS = "nBattalions"
+TYPE_SOLDIERS = "typeSoldiers"
+N_SOLDIERS = "nSoldiers"
+LOCATION = "location"
+GENERAL = "general"
+DRAGON_TYPE = "dragonType"
 
-    def createBattalions(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
+class Army:
+    def __init__(self, armyDicctionary):
+        self.__battalions = []
+
+    def addBattalionsSameType(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
         battalions = []
         
         for _ in range(nBattalions):
             battalions.append(Battalion(typeSoldiers, nSoldiers))
 
-        return battalions
+        self.appendBattalions(battalions)
 
-    @property
-    def armyType(self):
-        return self.__armyType
+    def appendBattalions(self, battalions):
+        self.__battalions.append(battalions)
 
     @property
     def battalions(self):
         return self.__battalions
-
-    @armyType.setter
-    def armyType(self, value):
-        self.__armyType = value
 
     @battalions.setter
     def battalions(self, value):
         self.__battalions = value
 
         
-
-army = Army(TARGARYEN)
-print(army.battalions[0])
