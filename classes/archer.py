@@ -7,9 +7,9 @@ Attributes:
     MIN_STRENGTH: an int for its min strength
 """
 
-MAX_STRENGTH = 20
-MIN_STRENGTH = 10
-
 class Archer(Soldier):
+    MAX_STRENGTH = 20
+    MIN_STRENGTH = 10
+
     def __init__(self):
-        super().__init__(MIN_STRENGTH, MAX_STRENGTH)
+        super().__init__(self.MIN_STRENGTH, self.MAX_STRENGTH)

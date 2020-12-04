@@ -1,28 +1,29 @@
-from army import *
+from army import Army
+from soldier import Soldier
 
 TARGERYEN_ARMY = {
     1: {
-        N_BATTALIONS: 20,
-        TYPE_SOLDIERS: HUMAN_SOLDIER,
-        N_SOLDIERS: 100,
-        LOCATION: None,
-        GENERAL: None, 
-        DRAGON_TYPE: None
+        Army.N_BATTALIONS: 20,
+        Army.TYPE_SOLDIERS: Soldier.HUMAN_SOLDIER,
+        Army.N_SOLDIERS: 100,
+        Army.LOCATION: None,
+        Army.GENERAL: None, 
+        Army.DRAGON_TYPE: None
     },
     2: {
-        N_BATTALIONS: 10,
-        TYPE_SOLDIERS: ARCHER,
-        N_SOLDIERS: 100,
-        LOCATION: None,
-        GENERAL: None, 
-        DRAGON_TYPE: None
+        Army.N_BATTALIONS: 10,
+        Army.TYPE_SOLDIERS: Soldier.ARCHER,
+        Army.N_SOLDIERS: 100,
+        Army.LOCATION: None,
+        Army.GENERAL: None, 
+        Army.DRAGON_TYPE: None
     },
     3: {
-        N_BATTALIONS: 5,
-        TYPE_SOLDIERS: UNDEAD_SOLDIER,
-        N_SOLDIERS: 100,
-        LOCATION: None,
-        GENERAL: None, 
-        DRAGON_TYPE: None
+        Army.N_BATTALIONS: 5,
+        Army.TYPE_SOLDIERS: Soldier.UNDEAD_SOLDIER,
+        Army.N_SOLDIERS: 100,
+        Army.LOCATION: None,
+        Army.GENERAL: None, 
+        Army.DRAGON_TYPE: None
     }
 }

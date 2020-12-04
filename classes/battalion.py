@@ -1,6 +1,6 @@
-from soldier import *
+from soldier import Soldier
 from archer import Archer
-from dragon import *
+from dragon import Dragon
 from soldierHuman import HumanSoldier
 from soldierUndead import UndeadSoldier
 
@@ -14,10 +14,10 @@ class Battalion():
         soldiers = []
         
         for _ in range(nSoldiers):
-            if typeSoldiers == ARCHER: soldier = Archer()
-            elif typeSoldiers == DRAGON: soldier = Dragon(dragonType)
-            elif typeSoldiers == HUMAN_SOLDIER: soldier = HumanSoldier()
-            elif typeSoldiers == UNDEAD_SOLDIER: soldier = UndeadSoldier()
+            if typeSoldiers == Soldier.ARCHER: soldier = Archer()
+            elif typeSoldiers == Soldier.DRAGON: soldier = Dragon(dragonType)
+            elif typeSoldiers == Soldier.HUMAN_SOLDIER: soldier = HumanSoldier()
+            elif typeSoldiers == Soldier.UNDEAD_SOLDIER: soldier = UndeadSoldier()
             else: soldier = None
 
             soldiers.append(soldier)
