@@ -1,36 +1,38 @@
+from battalion import *
+
 TARGARYEN = "Targaryen"
 WESTEROS = "Westeros"
 
 class Army:
     def __init__(self, armyType):
         self.__armyType = armyType
-        self.__battalions = self.createBattalions(armyType)
+        self.__battalions = self.createBattalions(1, DRAGON, 1)
 
-    def createBattalions(self, armyType):
+    def createBattalions(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
         battalions = []
-
-        if armyType == TARGARYEN:
-            print(armyType)
-
-        elif armyType == WESTEROS:
-            print(armyType)
+        
+        for _ in range(nBattalions):
+            battalions.append(Battalion(typeSoldiers, nSoldiers))
 
         return battalions
 
     @property
     def armyType(self):
-        return self.armyType
+        return self.__armyType
 
     @property
     def battalions(self):
-        return self.battalions
+        return self.__battalions
 
     @armyType.setter
     def armyType(self, value):
-        self.armyType = value
+        self.__armyType = value
 
     @battalions.setter
     def battalions(self, value):
-        self.battalions = value
+        self.__battalions = value
 
         
+
+army = Army(TARGARYEN)
+print(army.battalions[0])

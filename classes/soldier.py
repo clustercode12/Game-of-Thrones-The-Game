@@ -1,5 +1,10 @@
 import random
 
+ARCHER = "ARCHER"
+DRAGON = "DRAGON"
+HUMAN_SOLDIER = "HUMAN SOLDIER"
+UNDEAD_SOLDIER = "UNDEAD SOLDIER"
+
 class Soldier:
     def __init__(self, minStrength, maxStrength):
         strength = random.randint(minStrength, maxStrength)
