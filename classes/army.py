@@ -84,10 +84,10 @@ class Army:
         self.__battalions = []
 
         for i in range(len(armyDicctionary)):
-            bGroup = armyDicctionary[i] # Battalion Group
+            battalionGroup = armyDicctionary[i]
 
-            self.addBattalionGroup(bGroup[self.N_BATTALIONS], bGroup[self.TYPE_SOLDIERS], bGroup[self.N_SOLDIERS], 
-                bGroup[self.LOCATION], bGroup[self.GENERAL], bGroup[self.DRAGON_TYPE])
+            self.addBattalionGroup(battalionGroup[self.N_BATTALIONS], battalionGroup[self.TYPE_SOLDIERS], battalionGroup[self.N_SOLDIERS], 
+                battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE])
 
     def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
         battalionGroup = []
