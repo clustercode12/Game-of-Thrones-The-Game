@@ -9,7 +9,7 @@ class Army:
     LOCATION = "location"
     GENERAL = "general"
     DRAGON_TYPE = "dragonType"
-
+#andres
     WESTEROS_ARMY = {
         0: {
             N_BATTALIONS: 20,
