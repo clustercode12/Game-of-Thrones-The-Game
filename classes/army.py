@@ -1,7 +1,7 @@
 from battalion import Battalion
 from soldier import Soldier
 from dragon import Dragon
-
+#buenos dias
 class Army:
     N_BATTALIONS = "nBattalions"
     TYPE_SOLDIERS = "typeSoldiers"
