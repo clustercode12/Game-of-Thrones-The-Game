@@ -1,6 +1,7 @@
 from soldier import Soldier
 
 class Dragon(Soldier):
+    
     RHAEGAL = "Rhaegal"
     VISERION = "Viserion"
     DROGON = "Drogon"

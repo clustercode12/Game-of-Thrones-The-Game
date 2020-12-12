@@ -1,3 +1,17 @@
+"""
+A class used to represent the Battalions
+Attributes:
+    TYPE_SOLDIERS: a string for the type of soldier (archer,dragon,human or undead)
+    N_SOLDIERS:  the number of soldiers in the battalion
+    LOCATION : Where is the army located
+    GENERAL: The name of the General who leads the battalion 
+    DRAGON_TYPE:  The different dragons that exist ("Rhaegal", "Viserion", "Drogon", "Undead Dragon")
+    
+Methods:
+    -The constructor creates a list using each armies dictionaries
+    createSoldiers adds new soldiers to the set of soldiers with all their properties
+"""
+
 from soldier import Soldier
 from archer import Archer
 from dragon import Dragon
@@ -23,7 +37,8 @@ class Battalion():
             soldiers.append(soldier)
 
         return soldiers
-
+    
+    #getters
     @property
     def soldiers(self):
         return self.__soldiers
@@ -36,6 +51,7 @@ class Battalion():
     def general(self):
         return self.__general
 
+    #setters
     @soldiers.setter
     def soldiers(self, value):
         self.__soldiers = value
