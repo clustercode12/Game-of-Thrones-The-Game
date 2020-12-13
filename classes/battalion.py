@@ -23,6 +23,13 @@ class Battalion():
         self.__soldiers = self.createSoldiers(typeSoldiers, nSoldiers, dragonType)
         self.__location = location
         self.__general = general
+       
+    def __str__(self):
+        aux = "Battalion: " + str(self.__soldiers[0]) 
+        aux += " Is placed in " + str(self.location) + " and is lead by " + str(self.__general)
+        return aux
+
+        
 
     def createSoldiers(self, typeSoldiers, nSoldiers, dragonType = None):
         soldiers = []
@@ -63,3 +70,6 @@ class Battalion():
     @general.setter
     def general(self, value):
         self.__general = value
+        
+# bat1 = Battalion(Soldier.ARCHER,5)
+# print(bat1)
