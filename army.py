@@ -62,7 +62,7 @@ class Army:
             GENERAL: None, 
             DRAGON_TYPE: None
         },
-        3: {
+        2: {
             N_BATTALIONS: 1,
             TYPE_SOLDIERS: Soldier.DRAGON,
             N_SOLDIERS: 1,
@@ -70,7 +70,7 @@ class Army:
             GENERAL: None, 
             DRAGON_TYPE: Dragon.RHAEGAL
         },
-        4: {
+        3: {
             N_BATTALIONS: 1,
             TYPE_SOLDIERS: Soldier.DRAGON,
             N_SOLDIERS: 1,
@@ -78,7 +78,7 @@ class Army:
             GENERAL: None, 
             DRAGON_TYPE: Dragon.VISERION
         },
-        5: {
+        4: {
             N_BATTALIONS: 1,
             TYPE_SOLDIERS: Soldier.DRAGON,
             N_SOLDIERS: 1,
@@ -126,8 +126,9 @@ class Army:
             self.addBattalionGroup(battalionGroup[self.N_BATTALIONS], battalionGroup[self.TYPE_SOLDIERS], battalionGroup[self.N_SOLDIERS],
                                    battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE])
 
-        if self.name == self.WESTEROS:
-            self.addGeneralsToBattalions()
+        if self.name == self.WESTEROS: self.addGeneralsToBattalions()
+        elif self.name == self.TARGARYEN: self.emptyLocationsFromAllBattalions()
+        
        
 
     def __str__(self):
@@ -163,7 +164,13 @@ class Army:
 
                         addedGeneral = True
 
-                    
+    def emptyLocationsFromAllBattalions(self):
+        battalions = self.battalions
+        for i in battalions:
+            i.emptyLocation()
+
+        self.__battalions = battalions
+
 
 
     

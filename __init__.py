@@ -1,4 +1,5 @@
 from army import Army
 
-army = Army(Army.WESTEROS_ARMY)
-print(army)
+westerosArmy = Army(Army.WESTEROS_ARMY)
+targaryenArmy = Army(Army.TARGARYEN_ARMY)
+
