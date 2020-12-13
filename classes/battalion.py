@@ -20,9 +20,16 @@ from soldierUndead import UndeadSoldier
 
 class Battalion():
     def __init__(self, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
-        self.__soldiers = self.createSoldiers(typeSoldiers, nSoldiers, dragonType)
+        if general != None:
+            extra_strength = general.strength/10
+   
+        else:
+            extra_strength = 0
+            
+        self.__soldiers = self.createSoldiers(typeSoldiers, nSoldiers, dragonType, extra_strength)
         self.__location = location
         self.__general = general
+
        
     def __str__(self):
         aux = "Battalion: " + str(self.__soldiers[0]) 
@@ -31,7 +38,7 @@ class Battalion():
 
         
 
-    def createSoldiers(self, typeSoldiers, nSoldiers, dragonType = None):
+    def createSoldiers(self, typeSoldiers, nSoldiers, dragonType = None, extra_strength = 0):
         soldiers = []
         
         for _ in range(nSoldiers):
@@ -40,6 +47,7 @@ class Battalion():
             elif typeSoldiers == Soldier.HUMAN_SOLDIER: soldier = HumanSoldier()
             elif typeSoldiers == Soldier.UNDEAD_SOLDIER: soldier = UndeadSoldier()
             else: soldier = None
+            soldier.strength += extra_strength
 
             soldiers.append(soldier)
 
@@ -71,5 +79,6 @@ class Battalion():
     def general(self, value):
         self.__general = value
         
-# bat1 = Battalion(Soldier.ARCHER,5)
+#typeSoldiers, nSoldiers, location, general, dragonType = dragonType
+# bat1 = Battalion(Soldier.ARCHER,5,locations.SUNSPEAR,General(General.CERSEI))
 # print(bat1)

@@ -21,5 +21,10 @@ class General(Soldier):
         elif generalType == self.TYRION: return 150
         elif generalType == self.QUEEN or generalType == self.UNDEAD_KING: return 500
         else: return 0
+        
+    
 
     
+# g1 = General(General.TYWIN)
+
+# print(g1.strength)

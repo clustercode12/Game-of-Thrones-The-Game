@@ -122,11 +122,15 @@ class Army:
             self.__name = "Targaryen Army"
             Westeros = False
             
+        archers = self.ArcherGenerals() 
+        humans = 5 - archers
+            
         for i in range(len(armyDicctionary)):
             battalionGroup = armyDicctionary[i]
 
             self.addBattalionGroup(battalionGroup[self.N_BATTALIONS], battalionGroup[self.TYPE_SOLDIERS], battalionGroup[self.N_SOLDIERS],
-                                   battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE], Westeros)
+                                   battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE],
+                                   Westeros, archers, humans)
        
 
     def __str__(self):
@@ -137,25 +141,25 @@ class Army:
         return aux
    
     
-    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None, Westeros=False):
+    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None,
+                          Westeros=False, archers=0, humans=0):
         battalionGroup = []
                            
-        archers = self.ArcherGenerals() 
-        humans = 5 - archers
+
         for _ in range(nBattalions):
             if Westeros:
                 n = random.randint(0,6)
                 location = locations.Locations[n]
                 
                 if (typeSoldiers == Soldier.ARCHER) and (archers > 0):
-                    general = self.ChooseGeneral()
+                    general = General(self.ChooseGeneral())
                     archers -= 1
                     
                 elif (typeSoldiers == Soldier.ARCHER) and (archers == 0):
                     general = None
                     
                 if (typeSoldiers == Soldier.HUMAN_SOLDIER) and (humans > 0):
-                    general = self.ChooseGeneral()
+                    general = General(self.ChooseGeneral())
                     humans -= 1
                     
                 elif (typeSoldiers == Soldier.HUMAN_SOLDIER) and (humans == 0):
