@@ -12,13 +12,26 @@ Attributes:
     
 Methods:
     -The constructor creates a list using the dictionary of each army
-    addBattalionGroup: Creates a full complete battalion to the army you choose
-    appendBattalionGroup: Adds the created battalion into the set of battalions
+    
+    -addBattalionGroup: Creates a full complete battalion to the army you choose, taking into account if 
+    the army is Westeros, when it will choose a random general and a random location for each battalion that 
+    requires it.
+    
+    -appendBattalionGroup: Adds the created battalion into the set of battalions
+    
+    -ArcherGenerals: is a method used to assign randomly in which type of battalion
+    (archer or human) are going to be distributed the generals
+    
+    -ChooseGeneral: allows us to select a general that has not been used to implement him as a leader of 
+    the battalion  
 """
-
+from undeadKing import UndeadKing
 from battalion import Battalion
 from soldier import Soldier
 from dragon import Dragon
+from general import General
+import locations
+import random
 
 class Army:
     N_BATTALIONS = "nBattalions"
@@ -27,8 +40,12 @@ class Army:
     LOCATION = "location"
     GENERAL = "general"
     DRAGON_TYPE = "dragonType"
+    NAME = "name"
+    TARGARYEN = "Targaryen Army"
+    WESTEROS = "Westeros Army"
 
-    WESTEROS_ARMY = {
+    TARGARYEN_ARMY = {
+        NAME: TARGARYEN,
         0: {
             N_BATTALIONS: 20,
             TYPE_SOLDIERS: Soldier.HUMAN_SOLDIER,
@@ -45,7 +62,7 @@ class Army:
             GENERAL: None, 
             DRAGON_TYPE: None
         },
-        2: {
+        3: {
             N_BATTALIONS: 1,
             TYPE_SOLDIERS: Soldier.DRAGON,
             N_SOLDIERS: 1,
@@ -53,7 +70,7 @@ class Army:
             GENERAL: None, 
             DRAGON_TYPE: Dragon.RHAEGAL
         },
-        3: {
+        4: {
             N_BATTALIONS: 1,
             TYPE_SOLDIERS: Soldier.DRAGON,
             N_SOLDIERS: 1,
@@ -61,7 +78,7 @@ class Army:
             GENERAL: None, 
             DRAGON_TYPE: Dragon.VISERION
         },
-        4: {
+        5: {
             N_BATTALIONS: 1,
             TYPE_SOLDIERS: Soldier.DRAGON,
             N_SOLDIERS: 1,
@@ -70,8 +87,9 @@ class Army:
             DRAGON_TYPE: Dragon.DROGON
         }
     }
-
-    TARGARYEN_ARMY = {
+    
+    WESTEROS_ARMY = {
+        NAME: WESTEROS,
         0: {
             N_BATTALIONS: 20,
             TYPE_SOLDIERS: Soldier.HUMAN_SOLDIER,
@@ -95,36 +113,90 @@ class Army:
             LOCATION: None,
             GENERAL: None, 
             DRAGON_TYPE: None
-        }
+        },
     }
 
     def __init__(self, armyDicctionary):
-        self.__battalions = []
-
-        for i in range(len(armyDicctionary)):
+        self.__name = armyDicctionary[self.NAME]
+        self.__battalions = list()
+            
+        for i in range(len(armyDicctionary) - 1):
             battalionGroup = armyDicctionary[i]
 
-            self.addBattalionGroup(battalionGroup[self.N_BATTALIONS], battalionGroup[self.TYPE_SOLDIERS], battalionGroup[self.N_SOLDIERS], 
-                battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE])
+            self.addBattalionGroup(battalionGroup[self.N_BATTALIONS], battalionGroup[self.TYPE_SOLDIERS], battalionGroup[self.N_SOLDIERS],
+                                   battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE])
 
+        if self.name == self.WESTEROS:
+            self.addGeneralsToBattalions()
+       
 
-    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
-        battalionGroup = []
+    def __str__(self):
+        aux = self.__name + ":\n"
         
+        for j in range(len(self.__battalions)):
+            aux += str(self.battalions[j]) + "\n"
+        return aux
+   
+    
+    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
         for _ in range(nBattalions):
-            battalionGroup.append(Battalion(typeSoldiers, nSoldiers, dragonType = dragonType))
+            battalion = Battalion(typeSoldiers, nSoldiers, dragonType = dragonType)
+            
+            self.appendBattalion(battalion)
 
-        self.appendBattalionGroup(battalionGroup)
+    def addGeneralsToBattalions(self):
+        for i in General.WESTEROS_GENERALS:
+            general = General(i)
 
-    def appendBattalionGroup(self, battalionGroup):
-        self.__battalions.append(battalionGroup)
+            addedGeneral = False
+            while not addedGeneral:
+                randomBattalion = random.randrange(0, len(self.battalions))
+                battalion = self.battalions[randomBattalion]
+                
+                if battalion.general == None:
+                    if (battalion.isHumanBattalion() and general.soldierType != General.UNDEAD_KING) or (battalion.isUndeadBattalion() and general.soldierType == General.UNDEAD_KING):
+                        battalion.general = general
+                        if (general.soldierType != General.UNDEAD_KING):
+                            battalion.updateStrengthSoldier()
+
+                        self.modifySpecificBattalion(randomBattalion, battalion)
+
+                        addedGeneral = True
+
+                    
+
+
+    
    
     #getters
     @property
     def battalions(self):
         return self.__battalions
     
+    @property
+    def name(self):
+        return self.__name
+    
     #setters
-    @battalions.setter
-    def battalions(self, value):
-        self.__battalions = value
+    def appendBattalion(self, battalion):
+        self.__battalions.append(battalion)
+
+    def modifySpecificBattalion(self, index, battalion):
+        if index < len(self.__battalions): self.__battalions[index] = battalion
+        else: print("Error modifying a battalion")
+
+
+west = Army(Army.WESTEROS_ARMY)
+print(west)
+
+# targaryen = Army(Army.TARGARYEN_ARMY)
+# print(targaryen)
+
+        
+        
+        
+        
+        
+        
+        
+        
