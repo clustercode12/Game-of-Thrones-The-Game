@@ -25,7 +25,7 @@ Methods:
     -ChooseGeneral: allows us to select a general that has not been used to implement him as a leader of 
     the battalion  
 """
-
+from undeadKing import UndeadKing
 from battalion import Battalion
 from soldier import Soldier
 from dragon import Dragon
@@ -134,13 +134,14 @@ class Army:
             
         archers = self.ArcherGenerals() #NUMBER OF ARCHER BATTALIONS WITH GENERAL
         humans = 5 - archers #NUMBER OF HUMAN SOLDIER BATTALIONS WITH GENERAL
+        UndeadSetting = True #BOOLEAN IN ORDER TO ADD JUST 1 UNDEADKING
             
         for i in range(len(armyDicctionary)):
             battalionGroup = armyDicctionary[i]
 
             self.addBattalionGroup(battalionGroup[self.N_BATTALIONS], battalionGroup[self.TYPE_SOLDIERS], battalionGroup[self.N_SOLDIERS],
                                    battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE],
-                                   Westeros, archers, humans)
+                                   Westeros, archers, humans, UndeadSetting)
        
 
     def __str__(self):
@@ -152,7 +153,7 @@ class Army:
    
     
     def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None,
-                          Westeros=False, archers=0, humans=0):
+                          Westeros=False, archers=0, humans=0, UndeadSetting = False):
         battalionGroup = []
                            
 
@@ -177,6 +178,14 @@ class Army:
                     
                 elif (typeSoldiers == Soldier.HUMAN_SOLDIER) and (humans == 0):
                     general = None
+                    
+                #UNDEADKING ASSIGNMENT
+                if (typeSoldiers == Soldier.UNDEAD_SOLDIER) and (UndeadSetting):
+                    general = UndeadKing()
+                    UndeadSetting = False
+                    
+                elif (typeSoldiers == Soldier.UNDEAD_SOLDIER) and (UndeadSetting == False):
+                    general = None
 
             else:
                 general = None
@@ -185,6 +194,8 @@ class Army:
             battalionGroup.append(Battalion(typeSoldiers, nSoldiers, location, general, dragonType = dragonType))
 
         self.appendBattalionGroup(battalionGroup)
+        
+        return archers, humans, UndeadSetting
     
     def ArcherGenerals(self):
         archers = 0
@@ -218,20 +229,6 @@ class Army:
     @battalions.setter
     def battalions(self, value):
         self.__battalions = value
-        
-#The configuration of the Westeros army will be set automatically before the battle starts as follows:
-    
-# The Westeros army will be randomly placed in seven different location of Westeros: King’s Landing,
-# Winterfell, The Wall, Storm’s End, Riverrun, CasterlyRock, or Sunspear.
-
-# Human generals will be randomly assign to one human battalion. Soldiers in such battalion will increase
-# their strength in 10 % of the general’s current strength.
-
-# Undead kings will be randomly assigned to one undead battalion.
-
-# The defensive army deployment will be unknown to the player initially. Only after an attack to a specific point,
-# the player will know the defensive battalions located at such point.  
-        
 
 west = Army(Army.WESTEROS_ARMY)
 print(west)
@@ -239,9 +236,6 @@ print(west)
 # targaryen = Army(Army.TARGARYEN_ARMY)
 # print(targaryen)
 
-
-# TARGARYEN = Army("WESTEROS_ARMY")
-#print(TARGARYEN)
         
         
         
