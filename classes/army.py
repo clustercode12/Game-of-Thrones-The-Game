@@ -40,10 +40,12 @@ class Army:
     LOCATION = "location"
     GENERAL = "general"
     DRAGON_TYPE = "dragonType"
-    Generals = [General.TYWIN, General.JAIMIE, General.CERSEI, General.TYRION, General.STANNIS]
+    NAME = "name"
+    TARGARYEN = "Targaryen Army"
+    WESTEROS = "Westeros Army"
 
-
-    WESTEROS_ARMY = {
+    TARGARYEN_ARMY = {
+        NAME: TARGARYEN,
         0: {
             N_BATTALIONS: 20,
             TYPE_SOLDIERS: Soldier.HUMAN_SOLDIER,
@@ -55,14 +57,6 @@ class Army:
         1: {
             N_BATTALIONS: 10,
             TYPE_SOLDIERS: Soldier.ARCHER,
-            N_SOLDIERS: 100,
-            LOCATION: None,
-            GENERAL: None, 
-            DRAGON_TYPE: None
-        },
-        2: {
-            N_BATTALIONS: 5,
-            TYPE_SOLDIERS: Soldier.UNDEAD_SOLDIER,
             N_SOLDIERS: 100,
             LOCATION: None,
             GENERAL: None, 
@@ -93,9 +87,9 @@ class Army:
             DRAGON_TYPE: Dragon.DROGON
         }
     }
-
-    TARGARYEN_ARMY = {
-        
+    
+    WESTEROS_ARMY = {
+        NAME: WESTEROS,
         0: {
             N_BATTALIONS: 20,
             TYPE_SOLDIERS: Soldier.HUMAN_SOLDIER,
@@ -119,102 +113,60 @@ class Army:
             LOCATION: None,
             GENERAL: None, 
             DRAGON_TYPE: None
-        }
+        },
     }
-    
+
     def __init__(self, armyDicctionary):
-        self.__battalions = []
-        
-        if armyDicctionary == Army.WESTEROS_ARMY:
-            self.__name = "Westeros Army"
-            Westeros = True
-        elif armyDicctionary == Army.TARGARYEN_ARMY:
-            self.__name = "Targaryen Army"
-            Westeros = False
+        self.__name = armyDicctionary[self.NAME]
+        self.__battalions = list()
             
-        archers = self.ArcherGenerals() #NUMBER OF ARCHER BATTALIONS WITH GENERAL
-        humans = 5 - archers #NUMBER OF HUMAN SOLDIER BATTALIONS WITH GENERAL
-        UndeadSetting = True #BOOLEAN IN ORDER TO ADD JUST 1 UNDEADKING
-            
-        for i in range(len(armyDicctionary)):
+        for i in range(len(armyDicctionary) - 1):
             battalionGroup = armyDicctionary[i]
 
             self.addBattalionGroup(battalionGroup[self.N_BATTALIONS], battalionGroup[self.TYPE_SOLDIERS], battalionGroup[self.N_SOLDIERS],
-                                   battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE],
-                                   Westeros, archers, humans, UndeadSetting)
+                                   battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE])
+
+        if self.name == self.WESTEROS:
+            self.addGeneralsToBattalions()
        
 
     def __str__(self):
         aux = self.__name + ":\n"
-        for i in range(len(self.__battalions)):
-            for j in range(len(self.__battalions[i])):
-                aux += str(self.battalions[i][j]) + "\n"
+        
+        for j in range(len(self.__battalions)):
+            aux += str(self.battalions[j]) + "\n"
         return aux
    
     
-    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None,
-                          Westeros=False, archers=0, humans=0, UndeadSetting = False):
-        battalionGroup = []
-                           
-
+    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
         for _ in range(nBattalions):
-            if Westeros:
-                
-                #LOCATION ASSIGNMENT
-                n = random.randint(0,6)
-                location = locations.Locations[n]
-                
-                #GENERALS ASSIGNMENT
-                if (typeSoldiers == Soldier.ARCHER) and (archers > 0):
-                    general = General(self.ChooseGeneral())
-                    archers -= 1
-                    
-                elif (typeSoldiers == Soldier.ARCHER) and (archers == 0):
-                    general = None
-                    
-                if (typeSoldiers == Soldier.HUMAN_SOLDIER) and (humans > 0):
-                    general = General(self.ChooseGeneral())
-                    humans -= 1
-                    
-                elif (typeSoldiers == Soldier.HUMAN_SOLDIER) and (humans == 0):
-                    general = None
-                    
-                #UNDEADKING ASSIGNMENT
-                if (typeSoldiers == Soldier.UNDEAD_SOLDIER) and (UndeadSetting):
-                    general = UndeadKing()
-                    UndeadSetting = False
-                    
-                elif (typeSoldiers == Soldier.UNDEAD_SOLDIER) and (UndeadSetting == False):
-                    general = None
-
-            else:
-                general = None
-                location = None
+            battalion = Battalion(typeSoldiers, nSoldiers, dragonType = dragonType)
             
-            battalionGroup.append(Battalion(typeSoldiers, nSoldiers, location, general, dragonType = dragonType))
+            self.appendBattalion(battalion)
 
-        self.appendBattalionGroup(battalionGroup)
-        
-        return archers, humans, UndeadSetting
+    def addGeneralsToBattalions(self):
+        for i in General.WESTEROS_GENERALS:
+            general = General(i)
+
+            addedGeneral = False
+            while not addedGeneral:
+                randomBattalion = random.randrange(0, len(self.battalions))
+                battalion = self.battalions[randomBattalion]
+                
+                if battalion.general == None:
+                    if (battalion.isHumanBattalion() and general.soldierType != General.UNDEAD_KING) or (battalion.isUndeadBattalion() and general.soldierType == General.UNDEAD_KING):
+                        battalion.general = general
+                        if (general.soldierType != General.UNDEAD_KING):
+                            battalion.updateStrengthSoldier()
+
+                        self.modifySpecificBattalion(randomBattalion, battalion)
+
+                        addedGeneral = True
+
+                    
+
+
     
-    def ArcherGenerals(self):
-        archers = 0
-        for i in range(5):
-            l = random.randint(1,30)
-            if l <= 10:
-                archers += 1
-        return archers
-            
-
-    def ChooseGeneral(self,Generals=Generals):
-        if len(Generals) == 0:
-            return None
-        else:
-            n = random.randint(0,len(Generals)-1)
-            return Generals.pop(n)
-        
-    def appendBattalionGroup(self, battalionGroup):
-        self.__battalions.append(battalionGroup)
    
     #getters
     @property
@@ -226,9 +178,13 @@ class Army:
         return self.__name
     
     #setters
-    @battalions.setter
-    def battalions(self, value):
-        self.__battalions = value
+    def appendBattalion(self, battalion):
+        self.__battalions.append(battalion)
+
+    def modifySpecificBattalion(self, index, battalion):
+        if index < len(self.__battalions): self.__battalions[index] = battalion
+        else: print("Error modifying a battalion")
+
 
 west = Army(Army.WESTEROS_ARMY)
 print(west)

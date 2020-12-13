@@ -17,18 +17,18 @@ from archer import Archer
 from dragon import Dragon
 from soldierHuman import HumanSoldier
 from soldierUndead import UndeadSoldier
+import random, locations
 
 class Battalion():
-    def __init__(self, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
-        if general != None:
-            extra_strength = general.strength/10
-   
-        else:
-            extra_strength = 0
-            
-        self.__soldiers = self.createSoldiers(typeSoldiers, nSoldiers, dragonType, extra_strength)
-        self.__location = location
-        self.__general = general
+    def __init__(self, typeSoldiers, nSoldiers, dragonType = None):
+        self.__location = self.setRandomLocation()
+        self.__general = None
+
+        extraStrength = 0
+        if self.general != None: 
+            extraStrength = self.general.getBoostStrengthForSoldiers()
+
+        self.__soldiers = self.createSoldiers(typeSoldiers, nSoldiers, dragonType, extraStrength)
 
        
     def __str__(self):
@@ -36,9 +36,7 @@ class Battalion():
         aux += " Is placed in " + str(self.location) + " and is lead by " + str(self.__general)
         return aux
 
-        
-
-    def createSoldiers(self, typeSoldiers, nSoldiers, dragonType = None, extra_strength = 0):
+    def createSoldiers(self, typeSoldiers, nSoldiers, dragonType = None, extraStrength = 0):
         soldiers = []
         
         for _ in range(nSoldiers):
@@ -47,11 +45,34 @@ class Battalion():
             elif typeSoldiers == Soldier.HUMAN_SOLDIER: soldier = HumanSoldier()
             elif typeSoldiers == Soldier.UNDEAD_SOLDIER: soldier = UndeadSoldier()
             else: soldier = None
-            soldier.strength += extra_strength
+
+            soldier.strength += extraStrength
 
             soldiers.append(soldier)
 
         return soldiers
+
+    def updateStrengthSoldier(self):
+        for i in range(len(self.soldiers) - 1):
+            self.soldiers[i].strength += self.general.getBoostStrengthForSoldiers()
+            
+
+    def setRandomLocation(self):
+        randomLocation = random.randrange(0, len(locations.LOCATIONS))
+
+        return locations.LOCATIONS[randomLocation]
+
+    def isHumanBattalion(self):
+        soldierType = self.soldiers[0].soldierType
+
+        if soldierType == Soldier.ARCHER or soldierType == Soldier.HUMAN_SOLDIER: return True
+        return False
+
+    def isUndeadBattalion(self):
+        soldierType = self.soldiers[0].soldierType
+
+        if soldierType == Soldier.UNDEAD_SOLDIER: return True
+        return False
     
     #getters
     @property
@@ -70,10 +91,6 @@ class Battalion():
     @soldiers.setter
     def soldiers(self, value):
         self.__soldiers = value
-
-    @location.setter
-    def location(self, value):
-        self.__location = value
 
     @general.setter
     def general(self, value):
