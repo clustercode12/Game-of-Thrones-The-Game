@@ -19,10 +19,14 @@ Methods:
 from battalion import Battalion
 from soldier import Soldier
 from dragon import Dragon
+<<<<<<< Updated upstream
 from general import General
 import locations
 import random
 
+=======
+import location 
+>>>>>>> Stashed changes
 class Army:
     N_BATTALIONS = "nBattalions"
     TYPE_SOLDIERS = "typeSoldiers"
@@ -110,7 +114,8 @@ class Army:
             DRAGON_TYPE: None
         }
     }
-
+# The Westeros army will be randomly placed in seven different location of Westeros: King’s Landing,
+# Winterfell, The Wall, Storm’s End, Riverrun, CasterlyRock, or Sunspear.
     def __init__(self, armyDicctionary):
         self.__battalions = []
         
@@ -124,6 +129,7 @@ class Army:
         for i in range(len(armyDicctionary)):
             battalionGroup = armyDicctionary[i]
 
+<<<<<<< Updated upstream
             self.addBattalionGroup(battalionGroup[self.N_BATTALIONS], battalionGroup[self.TYPE_SOLDIERS], battalionGroup[self.N_SOLDIERS],
                                    battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE], Westeros)
        
@@ -139,6 +145,25 @@ class Army:
     
     
     def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None, Westeros = False):
+=======
+            self.addBattalionGroup(battalionGroup[self.N_BATTALIONS], battalionGroup[self.TYPE_SOLDIERS], battalionGroup[self.N_SOLDIERS], 
+                battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE])
+        
+        if armyDicctionary == WESTEROS_ARMY:
+            
+            
+        
+    def __str__(self):
+       # if armyDicctionary == WESTEROS_ARMY:
+        #    aux = armyDicctionary + " " + battalionGroup[self.N_BATTALIONS]
+       # elif armyDicctionary == TARGARYEN_ARMY:
+         #   aux = armyDicctionary + " " + battalionGroup[self.N_BATTALIONS]
+        aux = str(self.__battalions)
+        return aux
+    
+    
+    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
+>>>>>>> Stashed changes
         battalionGroup = []
                            
         archers = self.ArcherGenerals() 
@@ -165,6 +190,7 @@ class Army:
 
         self.appendBattalionGroup(battalionGroup)
     
+<<<<<<< Updated upstream
     def ArcherGenerals(self):
         archers = 0
         for i in range(5):
@@ -173,6 +199,9 @@ class Army:
                 archers += 1
         return archers
             
+=======
+
+>>>>>>> Stashed changes
 
     def ChooseGeneral(self,Generals=Generals):
         if len(Generals) == 0:
@@ -212,6 +241,7 @@ class Army:
 # The defensive army deployment will be unknown to the player initially. Only after an attack to a specific point,
 # the player will know the defensive battalions located at such point.  
         
+<<<<<<< Updated upstream
 
 west = Army(Army.WESTEROS_ARMY)
 print(west)
@@ -220,6 +250,35 @@ print(west)
 # print(targaryen)
 
 
+=======
+TARGARYEN = Army("WESTEROS_ARMY")
+#print(TARGARYEN)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+>>>>>>> Stashed changes
         
         
         

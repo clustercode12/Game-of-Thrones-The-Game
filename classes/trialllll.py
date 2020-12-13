@@ -39,6 +39,7 @@ print(TARGARYEN_ARMY[0][N_BATTALIONS])
 battalionGroup = TARGARYEN_ARMY[0]
 print(battalionGroup[N_BATTALIONS])
 
+<<<<<<< Updated upstream
 print(TARGARYEN_ARMY[0][LOCATION])
 TARGARYEN_ARMY[0][LOCATION] = "MAdrid"
 
@@ -46,6 +47,8 @@ print(TARGARYEN_ARMY[0])
 print(TARGARYEN_ARMY[0][LOCATION])
 
 
+=======
+>>>>>>> Stashed changes
 
 
 
