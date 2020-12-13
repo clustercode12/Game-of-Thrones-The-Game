@@ -12,8 +12,18 @@ Attributes:
     
 Methods:
     -The constructor creates a list using the dictionary of each army
-    addBattalionGroup: Creates a full complete battalion to the army you choose
-    appendBattalionGroup: Adds the created battalion into the set of battalions
+    
+    -addBattalionGroup: Creates a full complete battalion to the army you choose, taking into account if 
+    the army is Westeros, when it will choose a random general and a random location for each battalion that 
+    requires it.
+    
+    -appendBattalionGroup: Adds the created battalion into the set of battalions
+    
+    -ArcherGenerals: is a method used to assign randomly in which type of battalion
+    (archer or human) are going to be distributed the generals
+    
+    -ChooseGeneral: allows us to select a general that has not been used to implement him as a leader of 
+    the battalion  
 """
 
 from battalion import Battalion
@@ -122,8 +132,8 @@ class Army:
             self.__name = "Targaryen Army"
             Westeros = False
             
-        archers = self.ArcherGenerals() 
-        humans = 5 - archers
+        archers = self.ArcherGenerals() #NUMBER OF ARCHER BATTALIONS WITH GENERAL
+        humans = 5 - archers #NUMBER OF HUMAN SOLDIER BATTALIONS WITH GENERAL
             
         for i in range(len(armyDicctionary)):
             battalionGroup = armyDicctionary[i]
@@ -148,9 +158,12 @@ class Army:
 
         for _ in range(nBattalions):
             if Westeros:
+                
+                #LOCATION ASSIGNMENT
                 n = random.randint(0,6)
                 location = locations.Locations[n]
                 
+                #GENERALS ASSIGNMENT
                 if (typeSoldiers == Soldier.ARCHER) and (archers > 0):
                     general = General(self.ChooseGeneral())
                     archers -= 1
@@ -168,8 +181,6 @@ class Army:
             else:
                 general = None
                 location = None
-
-
             
             battalionGroup.append(Battalion(typeSoldiers, nSoldiers, location, general, dragonType = dragonType))
 
