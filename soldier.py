@@ -13,17 +13,12 @@ Methods:
 import random
 
 class Soldier:
-    ARCHER = "Archer"
-    DRAGON = "Dragon"
-    HUMAN_SOLDIER = "Human soldier"
-    UNDEAD_SOLDIER = "Undead soldier"
-
-
-
     def __init__(self, minStrength, maxStrength, soldierType):
+        BOOSTED_STRENGTH = 0
+
         strength = random.randint(minStrength, maxStrength)
 
-        self.__strength = strength
+        self.__strength = [strength, BOOSTED_STRENGTH]
         self.__soldierType = soldierType
 
     def __str__(self):
@@ -32,7 +27,19 @@ class Soldier:
     #getters
     @property
     def strength(self):
-        return self.__strength
+        strength = 0
+        for i in self.__strength:
+            strength += i
+        
+        return strength
+
+    @property
+    def baseStrength(self):
+        return self.__strength[0]
+
+    @property
+    def boostedStrength(self):
+        return self.__strength[1]
 
     @property
     def soldierType(self):
@@ -40,5 +47,5 @@ class Soldier:
 
     #setters
     @strength.setter
-    def strength(self, value):
-        self.__strength = value
+    def strength(self, strength):
+        self.__strength = strength

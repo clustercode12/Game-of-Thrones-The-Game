@@ -1,27 +1,18 @@
 from soldier import Soldier
+import armyDicctionaries as Dict
 
 class General(Soldier):
-    TYWIN = "Tywin"
-    JAIMIE = "Jaimie"
-    CERSEI = "Cersei"
-    TYRION = "Tyrion"
-    STANNIS = "Stannis"
-    QUEEN = "Queen Daenerys"
-    UNDEAD_KING = "Undead King"
-
-    WESTEROS_GENERALS = [TYWIN, JAIMIE, CERSEI, TYRION, STANNIS, UNDEAD_KING]
-
     def __init__(self, generalType):
         STRENGTH = self.getStrength(generalType)
         
         super().__init__(STRENGTH, STRENGTH, generalType)
 
     def getStrength(self, generalType):
-        if generalType == self.TYWIN or generalType == self.STANNIS: return 300
-        elif generalType == self.JAIMIE: return 250
-        elif generalType == self.CERSEI: return 200
-        elif generalType == self.TYRION: return 150
-        elif generalType == self.QUEEN or generalType == self.UNDEAD_KING: return 500
+        if generalType == Dict.TYWIN or generalType == Dict.STANNIS: return 300
+        elif generalType == Dict.JAIMIE: return 250
+        elif generalType == Dict.CERSEI: return 200
+        elif generalType == Dict.TYRION: return 150
+        elif generalType == Dict.QUEEN or generalType == Dict.UNDEAD_KING: return 500
         else: return 0
         
     def getBoostStrengthForSoldiers(self):
@@ -30,16 +21,9 @@ class General(Soldier):
 
         strengthAdded = 0
 
-        if (self.soldierType != self.UNDEAD_KING) and (self.soldierType != self.QUEEN):
-            strengthAdded = self.strength * BOOSTED_PERCENTAGE
-        elif self.soldierType == self.QUEEN:
+        if (self.soldierType != Dict.UNDEAD_KING) and (self.soldierType != Dict.QUEEN):
+            strengthAdded = self.baseStrength * BOOSTED_PERCENTAGE
+        elif self.soldierType == Dict.QUEEN:
             strengthAdded = STRENGTH_QUEEN_ADDED
 
         return strengthAdded
-
-
-
-    
-# g1 = General(General.TYWIN)
-
-# print(g1.strength)
