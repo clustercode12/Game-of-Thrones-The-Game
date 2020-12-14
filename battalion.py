@@ -95,6 +95,9 @@ class Battalion():
     @general.setter
     def general(self, value):
         self.__general = value
+
+    def emptyLocation(self):
+        self.__location = None
         
 #typeSoldiers, nSoldiers, location, general, dragonType = dragonType
 # bat1 = Battalion(Soldier.ARCHER,5,locations.SUNSPEAR,General(General.CERSEI))
