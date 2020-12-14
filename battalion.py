@@ -1,15 +1,38 @@
 """
 A class used to represent the Battalions
+
 Attributes:
-    TYPE_SOLDIERS: a string for the type of soldier (archer,dragon,human or undead)
-    N_SOLDIERS:  the number of soldiers in the battalion
-    LOCATION : Where is the army located
-    GENERAL: The name of the General who leads the battalion 
-    DRAGON_TYPE:  The different dragons that exist ("Rhaegal", "Viserion", "Drogon", "Undead Dragon")
+    
+    -TYPE_SOLDIERS: a string for the type of soldier (archer,dragon,human or undead)
+    
+    -N_SOLDIERS:  the number of soldiers in the battalion
+    
+    -LOCATION : Where is the army located
+    
+    -GENERAL: The name of the General who leads the battalion 
+    
+    -DRAGON_TYPE:  One of the different dragons ("Rhaegal", "Viserion", "Drogon", "Undead Dragon")
     
 Methods:
-    -The constructor creates a list using each armies dictionaries
-    createSoldiers adds new soldiers to the set of soldiers with all their properties
+    
+    -__init__(): creates a battalion given the type of soldier and the number of them
+    
+    -createSoldiers(): Adds new soldiers setting their properties according to the type
+    
+    -__str__(): returns a string with the Battalion soldiers, location and general
+    
+    -updateStrengthSoldier(): If there is a general, adds the proper strength to the current soldier
+    
+    -setRandomLocation(): sets the battalion in a random location
+    
+    -isHumanBattalion(): boolen True returned if the battalion is composed by humans
+    
+    -isUndeadBattalion(): boolen True returned if the battalion is composed by undeads
+    
+    -emptyLocation(): cleans the location of the battalions. Usefull in Targaryen´s Army
+    
+    -totalSoldierStrength(): property that returns the total strenght of all the members in the battalion
+
 """
 
 from soldier import Soldier
@@ -52,7 +75,6 @@ class Battalion():
 
     def setRandomLocation(self):
         randomLocation = random.randrange(0, len(Dict.LOCATIONS))
-
         return Dict.LOCATIONS[randomLocation]
 
     def isHumanBattalion(self):
