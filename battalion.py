@@ -24,20 +24,14 @@ class Battalion():
     def __init__(self, typeSoldiers, nSoldiers, dragonType = None):
         self.__location = self.setRandomLocation()
         self.__general = None
-
-        extraStrength = 0
-        if self.general != None: 
-            extraStrength = self.general.getBoostStrengthForSoldiers()
-
-        self.__soldiers = self.createSoldiers(typeSoldiers, nSoldiers, dragonType, extraStrength)
-
+        self.__soldiers = self.createSoldiers(typeSoldiers, nSoldiers, dragonType)
        
     def __str__(self):
         aux = f"Battalion: {self.soldiers[0].soldierType} ({self.totalSoldierStrength})"
         aux += " Is placed in " + str(self.location) + " and is lead by " + str(self.__general)
         return aux
 
-    def createSoldiers(self, typeSoldiers, nSoldiers, dragonType = None, extraStrength = 0):
+    def createSoldiers(self, typeSoldiers, nSoldiers, dragonType = None):
         soldiers = []
         
         for _ in range(nSoldiers):
@@ -46,8 +40,6 @@ class Battalion():
             elif typeSoldiers == Dict.HUMAN_SOLDIER: soldier = HumanSoldier()
             elif typeSoldiers == Dict.UNDEAD_SOLDIER: soldier = UndeadSoldier()
             else: soldier = None
-
-            soldier.strength += extraStrength
 
             soldiers.append(soldier)
 
@@ -64,17 +56,15 @@ class Battalion():
         return Dict.LOCATIONS[randomLocation]
 
     def isHumanBattalion(self):
-        soldierType = self.soldiers[0].soldierType
-
-        if soldierType == Dict.ARCHER or soldierType == Dict.HUMAN_SOLDIER: return True
+        if self.soldierType == Dict.ARCHER or self.soldierType == Dict.HUMAN_SOLDIER: return True
         return False
 
     def isUndeadBattalion(self):
-        soldierType = self.soldiers[0].soldierType
-
-        if soldierType == Dict.UNDEAD_SOLDIER: return True
+        if self.soldierType == Dict.UNDEAD_SOLDIER: return True
         return False
 
+    def emptyLocation(self):
+        self.__location = None
     
     #getters
     @property
@@ -98,6 +88,10 @@ class Battalion():
 
         return totalStrength
 
+    @property
+    def soldierType(self):
+        return self.soldiers[0].soldierType
+
     #setters
     @soldiers.setter
     def soldiers(self, value):
@@ -107,8 +101,7 @@ class Battalion():
     def general(self, value):
         self.__general = value
 
-    def emptyLocation(self):
-        self.__location = None
+    
         
 #typeSoldiers, nSoldiers, location, general, dragonType = dragonType
 # bat1 = Battalion(Soldier.ARCHER,5,locations.SUNSPEAR,General(General.CERSEI))

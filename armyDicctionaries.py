@@ -14,7 +14,6 @@ TYRION = "Tyrion"
 STANNIS = "Stannis"
 QUEEN = "Queen Daenerys"
 UNDEAD_KING = "Undead King"
-
 WESTEROS_GENERALS = [TYWIN, JAIMIE, CERSEI, TYRION, STANNIS, UNDEAD_KING]
 
 N_BATTALIONS = "nBattalions"
@@ -48,40 +47,30 @@ TARGARYEN_ARMY = {
         N_BATTALIONS: 20,
         TYPE_SOLDIERS: HUMAN_SOLDIER,
         N_SOLDIERS: 100,
-        LOCATION: None,
-        GENERAL: None, 
         DRAGON_TYPE: None
     },
     1: {
         N_BATTALIONS: 10,
         TYPE_SOLDIERS: ARCHER,
         N_SOLDIERS: 100,
-        LOCATION: None,
-        GENERAL: None, 
         DRAGON_TYPE: None
     },
     2: {
         N_BATTALIONS: 1,
         TYPE_SOLDIERS: DRAGON,
         N_SOLDIERS: 1,
-        LOCATION: None,
-        GENERAL: None, 
         DRAGON_TYPE: RHAEGAL
     },
     3: {
         N_BATTALIONS: 1,
         TYPE_SOLDIERS: DRAGON,
         N_SOLDIERS: 1,
-        LOCATION: None,
-        GENERAL: None, 
         DRAGON_TYPE: VISERION
     },
     4: {
         N_BATTALIONS: 1,
         TYPE_SOLDIERS: DRAGON,
         N_SOLDIERS: 1,
-        LOCATION: None,
-        GENERAL: None, 
         DRAGON_TYPE: DROGON
     }
 }
@@ -92,24 +81,18 @@ WESTEROS_ARMY = {
         N_BATTALIONS: 20,
         TYPE_SOLDIERS: HUMAN_SOLDIER,
         N_SOLDIERS: 100,
-        LOCATION: None,
-        GENERAL: None, 
         DRAGON_TYPE: None
     },
     1: {
         N_BATTALIONS: 10,
         TYPE_SOLDIERS: ARCHER,
         N_SOLDIERS: 100,
-        LOCATION: None,
-        GENERAL: None, 
         DRAGON_TYPE: None
     },
     2: {
         N_BATTALIONS: 5,
         TYPE_SOLDIERS: UNDEAD_SOLDIER,
         N_SOLDIERS: 100,
-        LOCATION: None,
-        GENERAL: None, 
         DRAGON_TYPE: None
     },
 }

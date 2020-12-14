@@ -42,4 +42,8 @@ class Turn:
     def attackerArmy(self):
         return self.__attackerArmy
 
+    @property
+    def defensorArmy(self):
+        return self.__defensorArmy
+
 

@@ -42,13 +42,11 @@ class Army:
         for i in range(len(armyDicctionary) - 1):
             battalionGroup = armyDicctionary[i]
 
-            self.addBattalionGroup(battalionGroup[Dict.N_BATTALIONS], battalionGroup[Dict.TYPE_SOLDIERS], battalionGroup[Dict.N_SOLDIERS],
-                                   battalionGroup[Dict.LOCATION], battalionGroup[Dict.GENERAL], battalionGroup[Dict.DRAGON_TYPE])
+            self.addBattalionGroup(battalionGroup[Dict.N_BATTALIONS], battalionGroup[Dict.TYPE_SOLDIERS], 
+                                    battalionGroup[Dict.N_SOLDIERS], battalionGroup[Dict.DRAGON_TYPE])
 
         if self.name == Dict.WESTEROS: self.addGeneralsToBattalions()
         elif self.name == Dict.TARGARYEN: self.emptyLocationsFromAllBattalions()
-        
-       
 
     def __str__(self):
         aux = self.__name + ":\n"
@@ -58,7 +56,7 @@ class Army:
         return aux
    
     
-    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, location = None, general = None, dragonType = None):
+    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, dragonType = None):
         for _ in range(nBattalions):
             battalion = Battalion(typeSoldiers, nSoldiers, dragonType = dragonType)
             
