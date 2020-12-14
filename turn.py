@@ -1,6 +1,3 @@
-from queen import Queen
-import armyDicctionaries as Dict
-import random
 """
 A class used to represent the Turns of the game
 
@@ -27,6 +24,11 @@ Methods:
     -selectRandomArmy(): chooses a random army with battalions left
 
 """
+
+from queen import Queen
+import armyDicctionaries as Dict
+import random
+
 class Turn:
     def __init__(self, attackerArmy, defensorArmy, queenAssignment, battalionQuantity, battalionOrder, attackMode, location):
         self.__attackerArmy = attackerArmy
@@ -68,5 +70,3 @@ class Turn:
     @property
     def defensorArmy(self):
         return self.__defensorArmy
-
-
