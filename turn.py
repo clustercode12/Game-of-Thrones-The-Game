@@ -11,7 +11,6 @@ class Turn:
     def __init__(self, attackerArmy, defensorArmy, queenAssignment, battalionQuantity, battalionOrder, attackMode, location):
         self.__attackerArmy = attackerArmy
         self.__defensorArmy = defensorArmy
-        self.__battalionOrder = battalionOrder
         self.__attackMode = attackMode
         self.__location = location
 
@@ -19,6 +18,8 @@ class Turn:
             self.selectRandomArmy(battalionQuantity)
 
         if queenAssignment: self.assignQueenToBattalion()
+
+        self.attackerArmy.orderBattalion(battalionOrder)
 
     def assignQueenToBattalion(self):
         index = self.attackerArmy.getRandomBattalionIndex()

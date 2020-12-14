@@ -32,7 +32,7 @@ class Battalion():
 
        
     def __str__(self):
-        aux = "Battalion: " + str(self.__soldiers[0]) 
+        aux = f"Battalion: {self.soldiers[0].soldierType} ({self.totalSoldierStrength})"
         aux += " Is placed in " + str(self.location) + " and is lead by " + str(self.__general)
         return aux
 
@@ -73,6 +73,7 @@ class Battalion():
 
         if soldierType == Soldier.UNDEAD_SOLDIER: return True
         return False
+
     
     #getters
     @property
@@ -86,6 +87,15 @@ class Battalion():
     @property
     def general(self):
         return self.__general
+
+    @property
+    def totalSoldierStrength(self):
+        totalStrength = 0
+
+        for i in self.soldiers:
+            totalStrength += i.strength
+
+        return totalStrength
 
     #setters
     @soldiers.setter

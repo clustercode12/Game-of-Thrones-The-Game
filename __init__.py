@@ -1,12 +1,13 @@
 from army import Army
 from general import General
 from turn import Turn
+import armyDicctionaries as Dict
 
-westerosArmy = Army(Army.WESTEROS_ARMY)
-targaryenArmy = Army(Army.TARGARYEN_ARMY)
+westerosArmy = Army(Dict.WESTEROS_ARMY)
+targaryenArmy = Army(Dict.TARGARYEN_ARMY)
 
 
 print(targaryenArmy)
 
-turn = Turn(targaryenArmy, westerosArmy, True, 10, 1, 1, 1, )
+turn = Turn(targaryenArmy, westerosArmy, True, 100, Turn.WEAKEST_FIRST, 1, 1, )
 print(turn.attackerArmy)

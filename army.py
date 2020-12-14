@@ -30,104 +30,24 @@ from battalion import Battalion
 from soldier import Soldier
 from dragon import Dragon
 from general import General
+from turn import Turn
+import armyDicctionaries as Dict
 import locations
 import random
 
 class Army:
-    N_BATTALIONS = "nBattalions"
-    TYPE_SOLDIERS = "typeSoldiers"
-    N_SOLDIERS = "nSoldiers"
-    LOCATION = "location"
-    GENERAL = "general"
-    DRAGON_TYPE = "dragonType"
-    NAME = "name"
-    TARGARYEN = "Targaryen army"
-    WESTEROS = "Westeros army"
-
-    TARGARYEN_ARMY = {
-        NAME: TARGARYEN,
-        0: {
-            N_BATTALIONS: 20,
-            TYPE_SOLDIERS: Soldier.HUMAN_SOLDIER,
-            N_SOLDIERS: 100,
-            LOCATION: None,
-            GENERAL: None, 
-            DRAGON_TYPE: None
-        },
-        1: {
-            N_BATTALIONS: 10,
-            TYPE_SOLDIERS: Soldier.ARCHER,
-            N_SOLDIERS: 100,
-            LOCATION: None,
-            GENERAL: None, 
-            DRAGON_TYPE: None
-        },
-        2: {
-            N_BATTALIONS: 1,
-            TYPE_SOLDIERS: Soldier.DRAGON,
-            N_SOLDIERS: 1,
-            LOCATION: None,
-            GENERAL: None, 
-            DRAGON_TYPE: Dragon.RHAEGAL
-        },
-        3: {
-            N_BATTALIONS: 1,
-            TYPE_SOLDIERS: Soldier.DRAGON,
-            N_SOLDIERS: 1,
-            LOCATION: None,
-            GENERAL: None, 
-            DRAGON_TYPE: Dragon.VISERION
-        },
-        4: {
-            N_BATTALIONS: 1,
-            TYPE_SOLDIERS: Soldier.DRAGON,
-            N_SOLDIERS: 1,
-            LOCATION: None,
-            GENERAL: None, 
-            DRAGON_TYPE: Dragon.DROGON
-        }
-    }
-    
-    WESTEROS_ARMY = {
-        NAME: WESTEROS,
-        0: {
-            N_BATTALIONS: 20,
-            TYPE_SOLDIERS: Soldier.HUMAN_SOLDIER,
-            N_SOLDIERS: 100,
-            LOCATION: None,
-            GENERAL: None, 
-            DRAGON_TYPE: None
-        },
-        1: {
-            N_BATTALIONS: 10,
-            TYPE_SOLDIERS: Soldier.ARCHER,
-            N_SOLDIERS: 100,
-            LOCATION: None,
-            GENERAL: None, 
-            DRAGON_TYPE: None
-        },
-        2: {
-            N_BATTALIONS: 5,
-            TYPE_SOLDIERS: Soldier.UNDEAD_SOLDIER,
-            N_SOLDIERS: 100,
-            LOCATION: None,
-            GENERAL: None, 
-            DRAGON_TYPE: None
-        },
-    }
-
     def __init__(self, armyDicctionary):
-        self.__name = armyDicctionary[self.NAME]
+        self.__name = armyDicctionary[Dict.NAME]
         self.__battalions = list()
             
         for i in range(len(armyDicctionary) - 1):
             battalionGroup = armyDicctionary[i]
 
-            self.addBattalionGroup(battalionGroup[self.N_BATTALIONS], battalionGroup[self.TYPE_SOLDIERS], battalionGroup[self.N_SOLDIERS],
-                                   battalionGroup[self.LOCATION], battalionGroup[self.GENERAL], battalionGroup[self.DRAGON_TYPE])
+            self.addBattalionGroup(battalionGroup[Dict.N_BATTALIONS], battalionGroup[Dict.TYPE_SOLDIERS], battalionGroup[Dict.N_SOLDIERS],
+                                   battalionGroup[Dict.LOCATION], battalionGroup[Dict.GENERAL], battalionGroup[Dict.DRAGON_TYPE])
 
-        if self.name == self.WESTEROS: self.addGeneralsToBattalions()
-        elif self.name == self.TARGARYEN: self.emptyLocationsFromAllBattalions()
+        if self.name == Dict.WESTEROS: self.addGeneralsToBattalions()
+        elif self.name == Dict.TARGARYEN: self.emptyLocationsFromAllBattalions()
         
        
 
@@ -176,7 +96,16 @@ class Army:
 
     def getRandomBattalionIndex(self):
         return random.randrange(0, len(self.battalions))
-   
+
+    def orderBattalion(self, method = Turn.STRONGEST_FIRST):
+        def orderFunction(e):
+            return e.totalSoldierStrength
+
+        if method == Turn.WEAKEST_FIRST:
+            self.__battalions.sort(key = orderFunction)
+        elif method == Turn.STRONGEST_FIRST:
+            self.__battalions.sort(key = orderFunction, reverse = True)
+
     #getters
     @property
     def battalions(self):
