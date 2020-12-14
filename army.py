@@ -3,7 +3,7 @@ A class used to represent the Armies
 
 Attributes:
     
-    -N_BATTALIONS: for represent the number of battalions in the army
+    -N_BATTALIONS: represents the number of battalions in the army
     
     -TYPE_SOLDIERS: a string for the type of soldier (archer,dragon,human or undead)
     
