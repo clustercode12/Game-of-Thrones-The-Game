@@ -30,9 +30,8 @@ class General(Soldier):
 
         strengthAdded = 0
 
-        if (self.soldierType != self.UNDEAD_KING) or (self.soldierType != self.QUEEN):
+        if (self.soldierType != self.UNDEAD_KING) and (self.soldierType != self.QUEEN):
             strengthAdded = self.strength * BOOSTED_PERCENTAGE
-
         elif self.soldierType == self.QUEEN:
             strengthAdded = STRENGTH_QUEEN_ADDED
 

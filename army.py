@@ -41,8 +41,8 @@ class Army:
     GENERAL = "general"
     DRAGON_TYPE = "dragonType"
     NAME = "name"
-    TARGARYEN = "Targaryen Army"
-    WESTEROS = "Westeros Army"
+    TARGARYEN = "Targaryen army"
+    WESTEROS = "Westeros army"
 
     TARGARYEN_ARMY = {
         NAME: TARGARYEN,
@@ -157,8 +157,7 @@ class Army:
                 if battalion.general == None:
                     if (battalion.isHumanBattalion() and general.soldierType != General.UNDEAD_KING) or (battalion.isUndeadBattalion() and general.soldierType == General.UNDEAD_KING):
                         battalion.general = general
-                        if (general.soldierType != General.UNDEAD_KING):
-                            battalion.updateStrengthSoldier()
+                        battalion.updateStrengthSoldier()
 
                         self.modifySpecificBattalion(randomBattalion, battalion)
 
@@ -171,9 +170,12 @@ class Army:
 
         self.__battalions = battalions
 
+    def modifySpecificBattalion(self, index, battalion):
+        if index < len(self.__battalions): self.__battalions[index] = battalion
+        else: print("Error modifying a battalion")
 
-
-    
+    def getRandomBattalionIndex(self):
+        return random.randrange(0, len(self.battalions))
    
     #getters
     @property
@@ -188,16 +190,12 @@ class Army:
     def appendBattalion(self, battalion):
         self.__battalions.append(battalion)
 
-    def modifySpecificBattalion(self, index, battalion):
-        if index < len(self.__battalions): self.__battalions[index] = battalion
-        else: print("Error modifying a battalion")
+    @battalions.setter
+    def battalions(self, battalions):
+        self.__battalions = battalions
 
+    
 
-west = Army(Army.WESTEROS_ARMY)
-print(west)
-
-# targaryen = Army(Army.TARGARYEN_ARMY)
-# print(targaryen)
 
         
         
