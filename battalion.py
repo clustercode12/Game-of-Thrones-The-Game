@@ -17,7 +17,8 @@ from archer import Archer
 from dragon import Dragon
 from soldierHuman import HumanSoldier
 from soldierUndead import UndeadSoldier
-import random, locations
+import armyDicctionaries as Dict
+import random
 
 class Battalion():
     def __init__(self, typeSoldiers, nSoldiers, dragonType = None):
@@ -40,10 +41,10 @@ class Battalion():
         soldiers = []
         
         for _ in range(nSoldiers):
-            if typeSoldiers == Soldier.ARCHER: soldier = Archer()
-            elif typeSoldiers == Soldier.DRAGON: soldier = Dragon(dragonType)
-            elif typeSoldiers == Soldier.HUMAN_SOLDIER: soldier = HumanSoldier()
-            elif typeSoldiers == Soldier.UNDEAD_SOLDIER: soldier = UndeadSoldier()
+            if typeSoldiers == Dict.ARCHER: soldier = Archer()
+            elif typeSoldiers == Dict.DRAGON: soldier = Dragon(dragonType)
+            elif typeSoldiers == Dict.HUMAN_SOLDIER: soldier = HumanSoldier()
+            elif typeSoldiers == Dict.UNDEAD_SOLDIER: soldier = UndeadSoldier()
             else: soldier = None
 
             soldier.strength += extraStrength
@@ -58,20 +59,20 @@ class Battalion():
             
 
     def setRandomLocation(self):
-        randomLocation = random.randrange(0, len(locations.LOCATIONS))
+        randomLocation = random.randrange(0, len(Dict.LOCATIONS))
 
-        return locations.LOCATIONS[randomLocation]
+        return Dict.LOCATIONS[randomLocation]
 
     def isHumanBattalion(self):
         soldierType = self.soldiers[0].soldierType
 
-        if soldierType == Soldier.ARCHER or soldierType == Soldier.HUMAN_SOLDIER: return True
+        if soldierType == Dict.ARCHER or soldierType == Dict.HUMAN_SOLDIER: return True
         return False
 
     def isUndeadBattalion(self):
         soldierType = self.soldiers[0].soldierType
 
-        if soldierType == Soldier.UNDEAD_SOLDIER: return True
+        if soldierType == Dict.UNDEAD_SOLDIER: return True
         return False
 
     

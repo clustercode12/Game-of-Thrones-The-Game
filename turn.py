@@ -1,12 +1,9 @@
 from queen import Queen
+import armyDicctionaries as Dict
 import random
 
 class Turn:
-    FULL_ARMY = 0
-    STRONGEST_FIRST = "Strongest First"
-    WEAKEST_FIRST = "Weakest First"
-    PARTIAL_ATTACK = "Partial Attack"
-    FULL_ATTACK = "Full Attack"
+    
 
     def __init__(self, attackerArmy, defensorArmy, queenAssignment, battalionQuantity, battalionOrder, attackMode, location):
         self.__attackerArmy = attackerArmy
@@ -14,7 +11,7 @@ class Turn:
         self.__attackMode = attackMode
         self.__location = location
 
-        if battalionQuantity != self.FULL_ARMY and battalionQuantity < len(attackerArmy.battalions): 
+        if battalionQuantity != Dict.FULL_ARMY and battalionQuantity < len(attackerArmy.battalions): 
             self.selectRandomArmy(battalionQuantity)
 
         if queenAssignment: self.assignQueenToBattalion()

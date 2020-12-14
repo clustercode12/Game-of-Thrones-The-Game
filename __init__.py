@@ -9,5 +9,5 @@ targaryenArmy = Army(Dict.TARGARYEN_ARMY)
 
 print(targaryenArmy)
 
-turn = Turn(targaryenArmy, westerosArmy, True, 100, Turn.WEAKEST_FIRST, 1, 1, )
+turn = Turn(targaryenArmy, westerosArmy, True, 100, Dict.WEAKEST_FIRST, 1, 1, )
 print(turn.attackerArmy)

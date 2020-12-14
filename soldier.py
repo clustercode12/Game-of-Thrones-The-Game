@@ -13,13 +13,6 @@ Methods:
 import random
 
 class Soldier:
-    ARCHER = "Archer"
-    DRAGON = "Dragon"
-    HUMAN_SOLDIER = "Human soldier"
-    UNDEAD_SOLDIER = "Undead soldier"
-
-
-
     def __init__(self, minStrength, maxStrength, soldierType):
         strength = random.randint(minStrength, maxStrength)
 

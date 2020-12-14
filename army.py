@@ -32,7 +32,6 @@ from dragon import Dragon
 from general import General
 from turn import Turn
 import armyDicctionaries as Dict
-import locations
 import random
 
 class Army:
@@ -66,7 +65,7 @@ class Army:
             self.appendBattalion(battalion)
 
     def addGeneralsToBattalions(self):
-        for i in General.WESTEROS_GENERALS:
+        for i in Dict.WESTEROS_GENERALS:
             general = General(i)
 
             addedGeneral = False
@@ -75,7 +74,7 @@ class Army:
                 battalion = self.battalions[randomBattalion]
                 
                 if battalion.general == None:
-                    if (battalion.isHumanBattalion() and general.soldierType != General.UNDEAD_KING) or (battalion.isUndeadBattalion() and general.soldierType == General.UNDEAD_KING):
+                    if (battalion.isHumanBattalion() and general.soldierType != Dict.UNDEAD_KING) or (battalion.isUndeadBattalion() and general.soldierType == Dict.UNDEAD_KING):
                         battalion.general = general
                         battalion.updateStrengthSoldier()
 
@@ -97,13 +96,13 @@ class Army:
     def getRandomBattalionIndex(self):
         return random.randrange(0, len(self.battalions))
 
-    def orderBattalion(self, method = Turn.STRONGEST_FIRST):
+    def orderBattalion(self, method = Dict.STRONGEST_FIRST):
         def orderFunction(e):
             return e.totalSoldierStrength
 
-        if method == Turn.WEAKEST_FIRST:
+        if method == Dict.WEAKEST_FIRST:
             self.__battalions.sort(key = orderFunction)
-        elif method == Turn.STRONGEST_FIRST:
+        elif method == Dict.STRONGEST_FIRST:
             self.__battalions.sort(key = orderFunction, reverse = True)
 
     #getters

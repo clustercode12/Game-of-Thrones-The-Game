@@ -1,4 +1,5 @@
 from soldier import Soldier
+import armyDicctionaries as Dict
 
 """
 A class used to represent the Archers
@@ -12,4 +13,4 @@ class Archer(Soldier):
     MIN_STRENGTH = 10
     
     def __init__(self):
-        super().__init__(self.MIN_STRENGTH, self.MAX_STRENGTH, Soldier.ARCHER)
+        super().__init__(self.MIN_STRENGTH, self.MAX_STRENGTH, Dict.ARCHER)
