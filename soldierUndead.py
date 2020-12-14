@@ -3,9 +3,12 @@ import armyDicctionaries as Dict
 
 """
 A class used to represent the Undead Soldiers
+
 Attributes:
-    MAX_STRENGTH: an int for its max strength
-    MIN_STRENGTH: an int for its min strength
+    
+    -MAX_STRENGTH: an int for its max strength
+    
+    -MIN_STRENGTH: an int for its min strength
 """
 
 class UndeadSoldier(Soldier):
