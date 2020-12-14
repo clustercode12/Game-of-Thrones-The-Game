@@ -3,8 +3,6 @@ import armyDicctionaries as Dict
 import random
 
 class Turn:
-    
-
     def __init__(self, attackerArmy, defensorArmy, queenAssignment, battalionQuantity, battalionOrder, attackMode, location):
         self.__attackerArmy = attackerArmy
         self.__defensorArmy = defensorArmy

@@ -103,6 +103,17 @@ class Army:
         elif method == Dict.STRONGEST_FIRST:
             self.__battalions.sort(key = orderFunction, reverse = True)
 
+    def getArmyFromLocation(self, location):
+        army = self
+        battalions = []
+
+        for i in army.battalions:
+            if i.location == location: 
+                battalions.append(i)
+
+        army.battalions = battalions
+        return army
+
     #getters
     @property
     def battalions(self):

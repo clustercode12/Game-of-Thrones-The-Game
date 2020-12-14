@@ -47,7 +47,7 @@ class Battalion():
 
     def updateStrengthSoldier(self):
         for i in range(len(self.soldiers) - 1):
-            self.soldiers[i].strength += self.general.getBoostStrengthForSoldiers()
+            self.soldiers[i].strength = [self.soldiers[i].baseStrength, self.general.getBoostStrengthForSoldiers()]
             
 
     def setRandomLocation(self):

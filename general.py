@@ -22,7 +22,7 @@ class General(Soldier):
         strengthAdded = 0
 
         if (self.soldierType != Dict.UNDEAD_KING) and (self.soldierType != Dict.QUEEN):
-            strengthAdded = self.strength * BOOSTED_PERCENTAGE
+            strengthAdded = self.baseStrength * BOOSTED_PERCENTAGE
         elif self.soldierType == Dict.QUEEN:
             strengthAdded = STRENGTH_QUEEN_ADDED
 
