@@ -44,7 +44,7 @@ class Army:
             battalionGroup = armyDicctionary[i]
 
             self.addBattalionGroup(battalionGroup[Dict.N_BATTALIONS], battalionGroup[Dict.TYPE_SOLDIERS], 
-                                    battalionGroup[Dict.N_SOLDIERS], battalionGroup[Dict.DRAGON_TYPE])
+                                    battalionGroup[Dict.N_SOLDIERS], battalionGroup[Dict.DRAGON_TYPE], battalionGroup[Dict.GENERAL])
 
         if self.name == Dict.WESTEROS: self.addGeneralsToBattalions()
         elif self.name == Dict.TARGARYEN: self.emptyLocationsFromAllBattalions()
@@ -57,9 +57,11 @@ class Army:
         return aux
    
     
-    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, dragonType = None):
+    def addBattalionGroup(self, nBattalions, typeSoldiers, nSoldiers, dragonType = None, generalType = None):
         for _ in range(nBattalions):
-            battalion = Battalion(typeSoldiers, nSoldiers, dragonType = dragonType)
+            general = None
+            if generalType == Dict.QUEEN: general = Queen()
+            battalion = Battalion(typeSoldiers, nSoldiers, dragonType = dragonType, general = general)
             
             self.appendBattalion(battalion)
 
@@ -75,7 +77,7 @@ class Army:
                 if battalion.general == None:
                     if (battalion.isHumanBattalion() and general.soldierType != Dict.UNDEAD_KING) or (battalion.isUndeadBattalion() and general.soldierType == Dict.UNDEAD_KING):
                         battalion.general = general
-                        self.modifySpecificBattalion(randomBattalion, battalion)
+
                         addedGeneral = True
 
     def addUndeadDragon(self):
@@ -91,30 +93,23 @@ class Army:
                 return self.battalions.index(i)
         return -1
 
-    def assignQueenToBattalion(self):
-        index = self.getRandomBattalionIndex()
-        battalion = self.battalions[index]
-        queen = Queen()
-        
-        battalion.general = queen
-        
-        self.modifySpecificBattalion(index, battalion)
-
-    def orderBattalion(self, method = Dict.STRONGEST_FIRST):
-        def orderFunction(e):
-            return e.totalSoldierStrength
-
-        if method == Dict.WEAKEST_FIRST:
-            self.__battalions.sort(key = orderFunction)
-        elif method == Dict.STRONGEST_FIRST:
-            self.__battalions.sort(key = orderFunction, reverse = True)
-
     def removeDeadBattalions(self):
         if not self.isEmpty:
             for i in range(len(self.battalions) - 1, -1, -1):
                 battalion = self.battalions[i]
                 if battalion.isEmpty:
                     self.battalions.remove(battalion)
+
+    def getQueenAndRemove(self):
+        queen = None
+        for i in self.battalions:
+            if i.general != None:
+                if i.general.soldierType == Dict.QUEEN:
+                    queen = i.general
+                    i.general = None
+                    return queen
+
+        return queen
 
     def getBattalionsFromLocation(self, location):
         battalions = []
@@ -133,7 +128,7 @@ class Army:
                 battalions.append(self.battalions[index])
                 battalionQuantity -= 1
 
-        return battalions    
+        return battalions
 
     @property
     def battalions(self):
@@ -153,10 +148,6 @@ class Army:
     @battalions.setter
     def battalions(self, battalions):
         self.__battalions = battalions
-
-    def modifySpecificBattalion(self, index, battalion):
-        if index < len(self.__battalions): self.__battalions[index] = battalion
-        else: print("Error modifying a battalion")
 
     def emptyLocationsFromAllBattalions(self):
         battalions = self.battalions

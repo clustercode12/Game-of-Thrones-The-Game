@@ -33,7 +33,7 @@ class Wave:
 
     def updateStrengthAfterFigth(self, reduceStrength, percentageReduced = 1/3, loserStrength = 0):
         strength = self.winner.strength
-        if reduceStrength:
+        if reduceStrength and not self.loser.isDead:
             strength -= percentageReduced * self.loser.strength
         
         self.winner.strength = strength
