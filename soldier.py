@@ -14,32 +14,22 @@ import random
 
 class Soldier:
     def __init__(self, minStrength, maxStrength, soldierType):
-        BOOSTED_STRENGTH = 0
-
         strength = random.randint(minStrength, maxStrength)
 
-        self.__strength = [strength, BOOSTED_STRENGTH]
+        self.__strength = strength
         self.__soldierType = soldierType
 
     def __str__(self):
         return(f"{self.soldierType} ({self.strength})")
     
+    @property
+    def isDead(self):
+        return(self.strength == 0)
+
     #getters
     @property
     def strength(self):
-        strength = 0
-        for i in self.__strength:
-            strength += i
-        
-        return strength
-
-    @property
-    def baseStrength(self):
-        return self.__strength[0]
-
-    @property
-    def boostedStrength(self):
-        return self.__strength[1]
+        return self.__strength
 
     @property
     def soldierType(self):

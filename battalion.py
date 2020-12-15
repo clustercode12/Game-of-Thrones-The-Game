@@ -22,13 +22,16 @@ import random
 
 class Battalion():
     def __init__(self, typeSoldiers, nSoldiers, dragonType = None):
-        self.__location = self.setRandomLocation()
+        self.__location = self.getRandomLocation()
         self.__general = None
         self.__soldiers = self.createSoldiers(typeSoldiers, nSoldiers, dragonType)
        
     def __str__(self):
-        aux = f"Battalion: {self.soldiers[0].soldierType} ({self.totalSoldierStrength})"
-        aux += " Is placed in " + str(self.location) + " and is lead by " + str(self.__general)
+        if self.isEmpty:
+            aux = "Dead Battalion"
+        else: 
+            aux = f"Battalion: {self.soldiers[0].soldierType} ({self.totalSoldierStrength}) (Size: {len(self.soldiers)})"
+            aux += " Is placed in " + str(self.location) + " and is lead by " + str(self.__general)
         return aux
 
     def createSoldiers(self, typeSoldiers, nSoldiers, dragonType = None):
@@ -43,14 +46,21 @@ class Battalion():
 
             soldiers.append(soldier)
 
-        return soldiers
+        return soldiers      
 
-    def updateStrengthSoldier(self):
-        for i in range(len(self.soldiers) - 1):
-            self.soldiers[i].strength = [self.soldiers[i].baseStrength, self.general.getBoostStrengthForSoldiers()]
-            
-
-    def setRandomLocation(self):
+    def removeDeadSoldiers(self):
+        if not self.isEmpty:
+            for i in range(self.soldiersAndGeneralSize):
+                if i == len(self.soldiers):
+                    if (self.general != None):
+                        if self.general.isDead:
+                            self.general = None
+                else:
+                    soldier = self.soldiers[i]
+                    if soldier.isDead:
+                        self.soldiers.remove(soldier)
+                    
+    def getRandomLocation(self):
         randomLocation = random.randrange(0, len(Dict.LOCATIONS))
 
         return Dict.LOCATIONS[randomLocation]
@@ -63,9 +73,28 @@ class Battalion():
         if self.soldierType == Dict.UNDEAD_SOLDIER: return True
         return False
 
-    def emptyLocation(self):
-        self.__location = None
+    def getRandomSoldierOrGeneral(self):
+        number = random.randrange(0, self.soldiersAndGeneralSize)
+
+        if number == len(self.soldiers): return self.general
+        
+        soldier = self.soldiers[number]
+        soldier.strength += self.getBoostStrengthForSoldiers()
+        return soldier
     
+    def getBoostStrengthForSoldiers(self):
+        BOOST_PERCENTAGE = 0.1
+        STRENGTH_QUEEN_ADDED = 50
+
+        strengthAdded = 0
+        if self.general != None: 
+            if (self.general.soldierType != Dict.UNDEAD_KING) and (self.general.soldierType != Dict.QUEEN):
+                strengthAdded = self.general.strength * BOOST_PERCENTAGE
+            elif self.general.soldierType == Dict.QUEEN:
+                strengthAdded = STRENGTH_QUEEN_ADDED
+
+        return strengthAdded
+
     #getters
     @property
     def soldiers(self):
@@ -86,13 +115,32 @@ class Battalion():
         for i in self.soldiers:
             totalStrength += i.strength
 
+        if self.general != None: totalStrength += self.general.strength
+
         return totalStrength
 
     @property
     def soldierType(self):
         return self.soldiers[0].soldierType
 
-    #setters
+    @property
+    def soldiersAndGeneralSize(self):
+        generalInt = 1
+        if self.general == None: generalInt = 0
+
+        return(len(self.soldiers) + generalInt)
+
+    @property
+    def soldiersAndGeneral(self):
+        soldiers = self.soldiers
+        if self.general != None: soldiers.append(self.general)
+
+        return soldiers
+
+    @property
+    def isEmpty(self):
+        return self.soldiersAndGeneralSize == 0
+
     @soldiers.setter
     def soldiers(self, value):
         self.__soldiers = value
@@ -101,8 +149,5 @@ class Battalion():
     def general(self, value):
         self.__general = value
 
-    
-        
-#typeSoldiers, nSoldiers, location, general, dragonType = dragonType
-# bat1 = Battalion(Soldier.ARCHER,5,locations.SUNSPEAR,General(General.CERSEI))
-# print(bat1)
+    def emptyLocation(self):
+        self.__location = None

@@ -14,16 +14,3 @@ class General(Soldier):
         elif generalType == Dict.TYRION: return 150
         elif generalType == Dict.QUEEN or generalType == Dict.UNDEAD_KING: return 500
         else: return 0
-        
-    def getBoostStrengthForSoldiers(self):
-        BOOSTED_PERCENTAGE = 0.1
-        STRENGTH_QUEEN_ADDED = 50
-
-        strengthAdded = 0
-
-        if (self.soldierType != Dict.UNDEAD_KING) and (self.soldierType != Dict.QUEEN):
-            strengthAdded = self.baseStrength * BOOSTED_PERCENTAGE
-        elif self.soldierType == Dict.QUEEN:
-            strengthAdded = STRENGTH_QUEEN_ADDED
-
-        return strengthAdded

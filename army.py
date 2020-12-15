@@ -31,6 +31,7 @@ from soldier import Soldier
 from dragon import Dragon
 from general import General
 from turn import Turn
+from queen import Queen
 import armyDicctionaries as Dict
 import random
 
@@ -74,25 +75,28 @@ class Army:
                 if battalion.general == None:
                     if (battalion.isHumanBattalion() and general.soldierType != Dict.UNDEAD_KING) or (battalion.isUndeadBattalion() and general.soldierType == Dict.UNDEAD_KING):
                         battalion.general = general
-                        battalion.updateStrengthSoldier()
-
                         self.modifySpecificBattalion(randomBattalion, battalion)
-
                         addedGeneral = True
 
-    def emptyLocationsFromAllBattalions(self):
-        battalions = self.battalions
-        for i in battalions:
-            i.emptyLocation()
-
-        self.__battalions = battalions
-
-    def modifySpecificBattalion(self, index, battalion):
-        if index < len(self.__battalions): self.__battalions[index] = battalion
-        else: print("Error modifying a battalion")
+    
 
     def getRandomBattalionIndex(self):
         return random.randrange(0, len(self.battalions))
+
+    def getBattalionIndexByID(self, battalionId):
+        for i in self.battalions:
+            if battalionId == id(i):
+                return self.battalions.index(i)
+        return -1
+
+    def assignQueenToBattalion(self):
+        index = self.getRandomBattalionIndex()
+        battalion = self.battalions[index]
+        queen = Queen()
+        
+        battalion.general = queen
+        
+        self.modifySpecificBattalion(index, battalion)
 
     def orderBattalion(self, method = Dict.STRONGEST_FIRST):
         def orderFunction(e):
@@ -103,18 +107,25 @@ class Army:
         elif method == Dict.STRONGEST_FIRST:
             self.__battalions.sort(key = orderFunction, reverse = True)
 
-    def getArmyFromLocation(self, location):
-        army = self
+    def getBattalionsFromLocation(self, location):
         battalions = []
 
-        for i in army.battalions:
+        for i in self.battalions:
             if i.location == location: 
                 battalions.append(i)
 
-        army.battalions = battalions
-        return army
+        return battalions
 
-    #getters
+    def getRandomBattalions(self, battalionQuantity):
+        battalions = []
+        while battalionQuantity > 0:
+            index = self.getRandomBattalionIndex()
+            if self.battalions[index] not in battalions:
+                battalions.append(self.battalions[index])
+                battalionQuantity -= 1
+
+        return battalions    
+
     @property
     def battalions(self):
         return self.__battalions
@@ -123,12 +134,22 @@ class Army:
     def name(self):
         return self.__name
     
-    #setters
     def appendBattalion(self, battalion):
         self.__battalions.append(battalion)
 
     @battalions.setter
     def battalions(self, battalions):
+        self.__battalions = battalions
+
+    def modifySpecificBattalion(self, index, battalion):
+        if index < len(self.__battalions): self.__battalions[index] = battalion
+        else: print("Error modifying a battalion")
+
+    def emptyLocationsFromAllBattalions(self):
+        battalions = self.battalions
+        for i in battalions:
+            i.emptyLocation()
+
         self.__battalions = battalions
 
     
