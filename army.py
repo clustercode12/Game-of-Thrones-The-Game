@@ -30,6 +30,7 @@ from battalion import Battalion
 from soldier import Soldier
 from dragon import Dragon
 from general import General
+from turn import Turn
 from queen import Queen
 import armyDicctionaries as Dict
 import random

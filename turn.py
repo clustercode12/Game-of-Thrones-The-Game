@@ -9,7 +9,7 @@ class Turn:
         self.__defensorArmy = defensorArmy
         self.__location = location
 
-        attackerBattalions = self.getAttackerBattalions(self.attackerArmy, battalionQuantity, queenAssignment, battalionOrder)
+        attackerBattalions = self.getAttackerBattalions(battalionQuantity, queenAssignment, battalionOrder)
         defensorBattalions = self.defensorArmy.getBattalionsFromLocation(location)
 
         self.attack(attackerBattalions, defensorBattalions, attackMode)
@@ -63,13 +63,11 @@ class Turn:
                     general = defensorBattalion.general
                     defensorBattalion.general = None
                     randomDefensorBattaion.general = general
+
         if winnerBattalion.soldierType in Dict.UNDEAD_BATTAION and winnerBattalion.general != None:
             if winnerBattalion.general == Dict.UNDEAD_KING:
                 undeadBattalion = Battalion(Dict.UNDEAD_SOLDIER, loserSize)
                 self.defensorArmy.appendBattalion(undeadBattalion)
-
-                    
-                
 
     def getWinnerBattalion(self, attackerBattalion, defensorBattalion):
         winnerBattalion = attackerBattalion
@@ -100,13 +98,13 @@ class Turn:
 
         return soldier
            
-    def getAttackerBattalions(self, attackerArmy, battalionQuantity, queenAssignment, battalionOrder):
+    def getAttackerBattalions(self, battalionQuantity, queenAssignment, battalionOrder):
         battalionsFight = []
         if battalionQuantity != Dict.FULL_ARMY and battalionQuantity < len(self.attackerArmy.battalions): 
-            battalionsFight = attackerArmy.getRandomBattalions(battalionQuantity)
-        else: battalionsFight = attackerArmy.battalions
+            battalionsFight = self.attackerArmy.getRandomBattalions(battalionQuantity)
+        else: battalionsFight = self.attackerArmy.battalions
 
-        queen = attackerArmy.getQueenAndRemove()
+        queen = self.attackerArmy.getQueenAndRemove()
         if queen != None:
             if queenAssignment:
                 index = random.randrange(0, len(battalionsFight))
@@ -114,7 +112,7 @@ class Turn:
             else: 
                 battalion = Battalion(None, 0, None, general = queen)
                 battalion.emptyLocation()
-                attackerArmy.appendBattalion(battalion)
+                self.attackerArmy.appendBattalion(battalion)
 
         battalionsFight = self.orderBattalions(battalionsFight, battalionOrder)
 

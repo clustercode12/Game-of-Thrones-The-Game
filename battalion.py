@@ -100,6 +100,8 @@ class Battalion():
 
         return strengthAdded
 
+
+
     #getters
     @property
     def soldiers(self):
