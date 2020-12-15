@@ -50,7 +50,6 @@ class Battalion():
 
     def removeDeadSoldiers(self):
         if not self.isEmpty:
-            print(self)
             for i in range(self.soldiersAndGeneralSize - 1, -1, -1):
                 if i == len(self.soldiers):
                     if self.general.isDead:

@@ -20,36 +20,24 @@ class Turn:
             
                 self.runWaves(attackerBattalion, defensorBattalion, attackMode)
 
+        self.attackerArmy.removeDeadBattalions()
+        self.defensorArmy.removeDeadBattalions()
+
     def runWaves(self, attackerBattalion, defensorBattalion, attackMode):
         soldiersFought = []
-        print(attackerBattalion)
 
         while not self.hasFinished(attackerBattalion, defensorBattalion, attackMode, soldiersFought):
             attackerSoldier = self.getRandomAttackerSoldier(attackerBattalion, attackMode, soldiersFought)
             defensorSoldier = defensorBattalion.getRandomSoldierOrGeneral()
 
             wave = Wave(attackerSoldier, defensorSoldier)
+            if wave.createUndeadDragon:
+                defensorBattalion.createUndeadDragon()
 
             attackerBattalion.removeDeadSoldiers()
             defensorBattalion.removeDeadSoldiers()
             
-            
-
-            # winner, looser = self.fight(attackerSoldier, defensorSoldier)
-            
-            # if attackMode == Dict.FULL_ATTACK:
-            #     if winner.soldierType == Dict.HUMAN_SOLDIER:
-            #         BOOST_HUMAN_SOLDIER_STRENGTH = 5
-            #         winner.strength += BOOST_HUMAN_SOLDIER_STRENGTH
-                #elif # increase queen strength
-                #asssing to another battalion if lead by general
-
-            
             soldiersFought.append(id(attackerSoldier))
-
-        print(attackerBattalion)
-        print(defensorBattalion)
-        
 
     def hasFinished(self, attackerBattalion, defensorBattalion, attackMode, soldiersFought = []):
         if attackMode == Dict.FULL_ATTACK:

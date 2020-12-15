@@ -24,7 +24,7 @@ class Soldier:
     
     @property
     def isDead(self):
-        return(self.strength == 0)
+        return(self.strength <= 0)
 
     #getters
     @property

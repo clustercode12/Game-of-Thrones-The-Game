@@ -8,9 +8,11 @@ class Wave:
         if self.isDragonAgainstArcher(attackerSoldier, defensorSoldier):
             defensorSoldier.strength += Dict.BOOST_ARCHER_STRENGTH
 
-        self.figth(attackerSoldier, defensorSoldier)
+        #boost strength of soldier if the battalion has a general
 
-    def figth(self, attackerSoldier, defensorSoldier):
+        self.fight(attackerSoldier, defensorSoldier)
+
+    def fight(self, attackerSoldier, defensorSoldier):
         self.__winner, self.__loser, reduceStrength = self.getWinnerAndLooser(attackerSoldier, defensorSoldier)
 
         self.updateStrengthAfterFigth(reduceStrength)

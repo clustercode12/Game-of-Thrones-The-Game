@@ -80,6 +80,7 @@ class Army:
 
     def addUndeadDragon(self):
         battalion = Battalion(Dict.DRAGON, 1, Dict.UNDEAD_DRAGON)
+        self.battalions.append(battalion)
 
     def getRandomBattalionIndex(self):
         return random.randrange(0, len(self.battalions))
@@ -108,6 +109,13 @@ class Army:
         elif method == Dict.STRONGEST_FIRST:
             self.__battalions.sort(key = orderFunction, reverse = True)
 
+    def removeDeadBattalions(self):
+        if not self.isEmpty:
+            for i in range(len(self.battalions) - 1, -1, -1):
+                battalion = self.battalions[i]
+                if battalion.isEmpty:
+                    self.battalions.remove(battalion)
+
     def getBattalionsFromLocation(self, location):
         battalions = []
 
@@ -134,6 +142,10 @@ class Army:
     @property
     def name(self):
         return self.__name
+
+    @property
+    def isEmpty(self):
+        return len(self.battalions) == 0
     
     def appendBattalion(self, battalion):
         self.__battalions.append(battalion)
