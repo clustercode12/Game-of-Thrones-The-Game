@@ -78,7 +78,8 @@ class Army:
                         self.modifySpecificBattalion(randomBattalion, battalion)
                         addedGeneral = True
 
-    
+    def addUndeadDragon(self):
+        battalion = Battalion(Dict.DRAGON, 1, Dict.UNDEAD_DRAGON)
 
     def getRandomBattalionIndex(self):
         return random.randrange(0, len(self.battalions))

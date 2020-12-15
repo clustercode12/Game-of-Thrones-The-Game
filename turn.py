@@ -15,9 +15,10 @@ class Turn:
 
     def attack(self, attackerBattalions, defensorBattalions, attackMode):
         for attackerBattalion in attackerBattalions:
-            defensorBattalion = defensorBattalions[random.randrange(0, len(defensorBattalions))]
-           
-            self.runWaves(attackerBattalion, defensorBattalion, attackMode)
+            if len(defensorBattalions) != 0:
+                defensorBattalion = defensorBattalions[random.randrange(0, len(defensorBattalions))]
+            
+                self.runWaves(attackerBattalion, defensorBattalion, attackMode)
 
     def runWaves(self, attackerBattalion, defensorBattalion, attackMode):
         soldiersFought = []

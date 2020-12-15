@@ -16,12 +16,12 @@ class Wave:
         self.updateStrengthAfterFigth(reduceStrength)
 
     def getWinnerAndLooser(self, attackerSoldier, defensorSoldier):
-        if attackerSoldier.soldierType in Dict.DRAGON and defensorSoldier.soldierType == Dict.UNDEAD_KING:
+        if attackerSoldier.soldierType in Dict.ALIVED_DRAGON and defensorSoldier.soldierType == Dict.UNDEAD_KING:
             self.createUndeadDragon = True
             return defensorSoldier, attackerSoldier, False
         elif attackerSoldier.soldierType == Dict.HUMAN_SOLDIER and defensorSoldier.soldierType == Dict.UNDEAD_DRAGON:
             return defensorSoldier, attackerSoldier, False
-        elif attackerSoldier.soldierType in Dict.DRAGON and defensorSoldier.soldierType == Dict.UNDEAD_SOLDIER:
+        elif attackerSoldier.soldierType in Dict.ALIVED_DRAGON and defensorSoldier.soldierType == Dict.UNDEAD_SOLDIER:
             return attackerSoldier, defensorSoldier, False
         elif attackerSoldier.strength > defensorSoldier.strength: 
             return attackerSoldier, defensorSoldier, True
@@ -42,7 +42,7 @@ class Wave:
 
 
     def isDragonAgainstArcher(self, attackerSoldier, defensorSoldier):
-        return (attackerSoldier.soldierType in Dict.DRAGON and defensorSoldier.soldierType == Dict.ARCHER) or (defensorSoldier.soldierType in Dict.DRAGON and attackerSoldier.soldierType == Dict.ARCHER)
+        return (attackerSoldier.soldierType in Dict.ALIVED_DRAGON and defensorSoldier.soldierType == Dict.ARCHER) or (defensorSoldier.soldierType in Dict.ALIVED_DRAGON and attackerSoldier.soldierType == Dict.ARCHER)
 
     def __str__(self):
         return f"Winner: {self.winner} | Loser: {self.loser}"

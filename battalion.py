@@ -30,7 +30,7 @@ class Battalion():
         if self.isEmpty:
             aux = "Dead Battalion"
         else: 
-            aux = f"Battalion: {self.soldiers[0].soldierType} ({self.totalSoldierStrength}) (Size: {len(self.soldiers)})"
+            aux = f"Battalion: {self.soldierType} ({self.totalSoldierStrength}) (Size: {len(self.soldiers)})"
             aux += " Is placed in " + str(self.location) + " and is lead by " + str(self.__general)
         return aux
 
@@ -50,11 +50,11 @@ class Battalion():
 
     def removeDeadSoldiers(self):
         if not self.isEmpty:
-            for i in range(self.soldiersAndGeneralSize):
+            print(self)
+            for i in range(self.soldiersAndGeneralSize - 1, -1, -1):
                 if i == len(self.soldiers):
-                    if (self.general != None):
-                        if self.general.isDead:
-                            self.general = None
+                    if self.general.isDead:
+                        self.general = None
                 else:
                     soldier = self.soldiers[i]
                     if soldier.isDead:
@@ -121,7 +121,9 @@ class Battalion():
 
     @property
     def soldierType(self):
-        return self.soldiers[0].soldierType
+        if not self.isEmpty and len(self.soldiers) != 0:
+            return self.soldiers[0].soldierType
+        return "no soldiers"
 
     @property
     def soldiersAndGeneralSize(self):
