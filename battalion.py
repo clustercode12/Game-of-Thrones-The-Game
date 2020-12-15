@@ -15,22 +15,23 @@ Methods:
 from soldier import Soldier
 from archer import Archer
 from dragon import Dragon
+from queen import Queen
 from soldierHuman import HumanSoldier
 from soldierUndead import UndeadSoldier
 import armyDicctionaries as Dict
 import random
 
 class Battalion():
-    def __init__(self, typeSoldiers, nSoldiers, dragonType = None):
+    def __init__(self, typeSoldiers, nSoldiers, dragonType = None, general = None):
         self.__location = self.getRandomLocation()
-        self.__general = None
+        self.__general = general
         self.__soldiers = self.createSoldiers(typeSoldiers, nSoldiers, dragonType)
        
     def __str__(self):
         if self.isEmpty:
             aux = "Dead Battalion"
         else: 
-            aux = f"Battalion: {self.soldierType} ({self.totalSoldierStrength}) (Size: {len(self.soldiers)})"
+            aux = f"Battalion: {self.soldierType} ({self.totalStrength}) (Size: {len(self.soldiers)})"
             aux += " Is placed in " + str(self.location) + " and is lead by " + str(self.__general)
         return aux
 
@@ -46,7 +47,7 @@ class Battalion():
 
             soldiers.append(soldier)
 
-        return soldiers      
+        return soldiers  
 
     def removeDeadSoldiers(self):
         if not self.isEmpty:
@@ -73,13 +74,18 @@ class Battalion():
         return False
 
     def getRandomSoldierOrGeneral(self):
-        number = random.randrange(0, self.soldiersAndGeneralSize)
+        if self.isEmpty:
+            deadSoldier = HumanSoldier()
+            deadSoldier.strength = 0
+            return deadSoldier
+        else: 
+            number = random.randrange(0, self.soldiersAndGeneralSize)
 
-        if number == len(self.soldiers): return self.general
-        
-        soldier = self.soldiers[number]
-        soldier.strength += self.getBoostStrengthForSoldiers()
-        return soldier
+            if number == len(self.soldiers): return self.general
+            
+            soldier = self.soldiers[number]
+            soldier.strength += self.getBoostStrengthForSoldiers()
+            return soldier
     
     def getBoostStrengthForSoldiers(self):
         BOOST_PERCENTAGE = 0.1
@@ -108,7 +114,7 @@ class Battalion():
         return self.__general
 
     @property
-    def totalSoldierStrength(self):
+    def totalStrength(self):
         totalStrength = 0
 
         for i in self.soldiers:
@@ -152,3 +158,7 @@ class Battalion():
 
     def emptyLocation(self):
         self.__location = None
+
+    def increaseSoldierStrength(self, value):
+        for i in self.soldiers:
+            i.strength += value

@@ -7,6 +7,7 @@ DROGON = "Drogon"
 ALIVED_DRAGON = [RHAEGAL, VISERION, DROGON]
 UNDEAD_DRAGON = "Undead Dragon"
 DRAGON = ALIVED_DRAGON + [UNDEAD_DRAGON]
+UNDEAD_BATTAION = [UNDEAD_SOLDIER, UNDEAD_DRAGON]
 
 TYWIN = "Tywin"
 JAIMIE = "Jaimie"
@@ -51,31 +52,43 @@ TARGARYEN_ARMY = {
         N_BATTALIONS: 20,
         TYPE_SOLDIERS: HUMAN_SOLDIER,
         N_SOLDIERS: 100,
-        DRAGON_TYPE: None
+        DRAGON_TYPE: None,
+        GENERAL: None
     },
     1: {
         N_BATTALIONS: 10,
         TYPE_SOLDIERS: ARCHER,
         N_SOLDIERS: 100,
-        DRAGON_TYPE: None
+        DRAGON_TYPE: None,
+        GENERAL: None
     },
     2: {
         N_BATTALIONS: 1,
         TYPE_SOLDIERS: DRAGON,
         N_SOLDIERS: 1,
-        DRAGON_TYPE: RHAEGAL
+        DRAGON_TYPE: RHAEGAL,
+        GENERAL: None
     },
     3: {
         N_BATTALIONS: 1,
         TYPE_SOLDIERS: DRAGON,
         N_SOLDIERS: 1,
-        DRAGON_TYPE: VISERION
+        DRAGON_TYPE: VISERION,
+        GENERAL: None
     },
     4: {
         N_BATTALIONS: 1,
         TYPE_SOLDIERS: DRAGON,
         N_SOLDIERS: 1,
-        DRAGON_TYPE: DROGON
+        DRAGON_TYPE: DROGON,
+        GENERAL: None
+    },
+    5: {
+        N_BATTALIONS: 1,
+        TYPE_SOLDIERS: None,
+        N_SOLDIERS: 0,
+        DRAGON_TYPE: None,
+        GENERAL: QUEEN
     }
 }
 
@@ -85,18 +98,21 @@ WESTEROS_ARMY = {
         N_BATTALIONS: 20,
         TYPE_SOLDIERS: HUMAN_SOLDIER,
         N_SOLDIERS: 100,
-        DRAGON_TYPE: None
+        DRAGON_TYPE: None,
+        GENERAL: None
     },
     1: {
         N_BATTALIONS: 10,
         TYPE_SOLDIERS: ARCHER,
         N_SOLDIERS: 100,
-        DRAGON_TYPE: None
+        DRAGON_TYPE: None,
+        GENERAL: None
     },
     2: {
         N_BATTALIONS: 5,
         TYPE_SOLDIERS: UNDEAD_SOLDIER,
         N_SOLDIERS: 100,
-        DRAGON_TYPE: None
+        DRAGON_TYPE: None,
+        GENERAL: None
     },
 }
