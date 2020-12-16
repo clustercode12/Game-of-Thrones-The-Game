@@ -14,7 +14,7 @@ Attributes:
     
 Methods:
     
-    -__init__(): creates the wave taking into account the user inputs such as the type of attack 
+    -__init__(): creates the turn taking into account the user inputs such as the type of attack 
     or the queenAssignment
                     
     -attack(): composes the attack. Uses more methods explained below to get the attack done properly
