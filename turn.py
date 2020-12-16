@@ -24,7 +24,7 @@ Methods:
     -selectRandomArmy(): chooses a random army with battalions left
 
 """
-from wave import Wave
+from waves import Wave
 from battalion import Battalion
 import armyDicctionaries as Dict
 import random
