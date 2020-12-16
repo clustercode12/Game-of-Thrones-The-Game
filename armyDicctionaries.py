@@ -46,6 +46,23 @@ LOCATIONS = [KINGS_LANDING,WINTERFELL,THE_WALL,STORMS_END,RIVERRUN ,CASTERLYROCK
 
 BOOST_ARCHER_STRENGTH = 30
 
+#MAIN
+START = 0
+WELCOME = "Welcome to the BATTLE FOR WESTEROS!! \n Congrats! You have been chosen to be leading the army of Daenerys Targaryen against the combined forces of Westeros"
+ENTER_TO_START = "Press enter in order to start! "
+INTRODUCTION = "You are leading the Daenerys Targaryen Army so... \n Let´s set up your army!"
+QUEEN = 0
+QUEEN_LEADING = "Do you want to have Queen Daenerys leading a battalion? (Yes/No): "
+TYPE_OF_ATTACK = 0
+ALL_ARMY = "Do you want to attack with all the army?: (Yes/No): "
+N_BATTALIONS = 1000
+N_BATT = "How many battalions do you want to attack with?: "
+ATTACK_MODE = "None"
+ATTACK_TYPE = "Do you want to do Full Attack or Partial Attack?: "
+TARGET_LOCATION = ("Where do you want to attack?: ",LOCATIONS,)
+ATTACK_ORDER = "None"
+ATTACK_ORDER_TYPE = ("Do you want to attack starting with the strongest battalion first or the weakest first? (Strongest First/ Weakest First): ")
+
 TARGARYEN_ARMY = {
     NAME: TARGARYEN,
     0: {
