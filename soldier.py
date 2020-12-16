@@ -1,12 +1,21 @@
 """
 A class used to represent the Soldiers
+
 Attributes:
-    MIN_STRENGTH: an int for its min strength
-    MAX_STRENGTH: an int for its max strength
-    TYPE_SOLDIERS: a string for the type of soldier (archer,dragon,human or undead)
+    
+    -MIN_STRENGTH: an int for its min strength
+    
+    -MAX_STRENGTH: an int for its max strength
+    
+    -TYPE_SOLDIERS: a string for the type of soldier (archer,dragon,human or undead)
     
 Methods:
-    __str__(): returns a string with the SoldierType and SoldierStrenght
+    
+    -__str__(): returns a string with the SoldierType and SoldierStrenght
+    
+    -baseStrength(): property that returns the original strength of the soldier
+    
+    -boostedStrength(): refers the strength of the soldier boosted by a battalion general
     
 """
 

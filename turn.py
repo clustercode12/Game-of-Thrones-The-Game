@@ -1,3 +1,29 @@
+"""
+A class used to represent the Turns of the game
+
+Attributes:
+    
+    -ATTACKER_ARMY: Targaryens Army, the one that attacks
+    
+    -DEFENSOR_ARMY: Westero´s Army, the one defending
+    
+    -ATTACK_MODE: Full or partial, is how the player wants to attack
+    
+    -LOCATION: The place where the battle in this turn will take place
+    
+    
+Methods:
+    
+    -__init__(): creates the wave taking into account the user inputs such as the type of attack 
+    or the queenAssignment
+    
+    -__str__():
+        
+    -assignQueenToBattalion(): sets the queen as a general in the chosen battalion upgrading it
+    
+    -selectRandomArmy(): chooses a random army with battalions left
+
+"""
 from wave import Wave
 from battalion import Battalion
 import armyDicctionaries as Dict

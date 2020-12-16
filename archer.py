@@ -1,3 +1,12 @@
+"""
+A class used to represent the Archers
+
+Attributes:
+    
+    -MIN_STRENGTH: an int for its min strength
+    
+    -MAX_STRENGTH: an int for its max strength
+"""
 from soldier import Soldier
 import armyDicctionaries as Dict
 

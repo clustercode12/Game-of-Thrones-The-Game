@@ -1,29 +1,48 @@
+
 """
 A class used to represent the Armies
+
 Attributes:
-    N_BATTALIONS: for represent the number of battalions in the army
-    TYPE_SOLDIERS: a string for the type of soldier (archer,dragon,human or undead)
-    N_SOLDIERS:  the number of soldiers in the battalion
-    LOCATION : Where is the army located
-    GENERAL: The name of the General who leads the battalion 
-    DRAGON_TYPE:  The different dragons that exist ("Rhaegal", "Viserion", "Drogon", "Undead Dragon")
-    MIN_STRENGTH: an int for its min strength
-    MAX_STRENGTH: an int for its max strength
+    
+    -N_BATTALIONS: represents the number of battalions in the army
+    
+    -TYPE_SOLDIERS: a string for the type of soldier (archer,dragon,human or undead)
+    
+    -N_SOLDIERS:  the number of soldiers in the battalion
+    
+    -LOCATION : Where is the army located
+    
+    -GENERAL: The name of the General who leads the battalion 
+    
+    -DRAGON_TYPE:  The different dragons that exist ("Rhaegal", "Viserion", "Drogon", "Undead Dragon")
+    
+    -MIN_STRENGTH: an int for its min strength
+    
+    -MAX_STRENGTH: an int for its max strength
     
 Methods:
-    -The constructor creates a list using the dictionary of each army
     
-    -addBattalionGroup: Creates a full complete battalion to the army you choose, taking into account if 
-    the army is Westeros, when it will choose a random general and a random location for each battalion that 
-    requires it.
+    -__init__(): creates the army taking into account if is Targaryens or Westeros
     
-    -appendBattalionGroup: Adds the created battalion into the set of battalions
+    -__str__(): returns a string with the name of the Army, and the Battalions that comforms it
+
+    -addBattalionGroup(): Creates a full complete battalion and adds it into the list of battalions
+        
+    -addGeneralsToBattalions(): modifies a battalion by adding a general randomly to it and appliying the props
     
-    -ArcherGenerals: is a method used to assign randomly in which type of battalion
-    (archer or human) are going to be distributed the generals
+    -emptyLocationsFromAllBattalions(): clears the location of all the Battalions. Usefull in Targaryen Army
     
-    -ChooseGeneral: allows us to select a general that has not been used to implement him as a leader of 
-    the battalion  
+    -modifySpecificBattalion(): allows the addGenerals method to change the properties of a battalion
+    
+    -getRandomBattalionIndex(): returns a random battalion from an army
+    
+    -orderBattalion(): orders the battalions by its strength 
+    
+    -getArmyFromLocation(): returns the location of an army during the turns
+    
+    -appendBattalion(): property that adds the created battalion into the set of battalions
+
+        
 """
 from undeadKing import UndeadKing
 from battalion import Battalion
