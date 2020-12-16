@@ -30,18 +30,23 @@ Methods:
         
     -addGeneralsToBattalions(): modifies a battalion by adding a general randomly to it and appliying the props
     
-    -emptyLocationsFromAllBattalions(): clears the location of all the Battalions. Usefull in Targaryen Army
-    
-    -modifySpecificBattalion(): allows the addGenerals method to change the properties of a battalion
-    
+    -addUndeadDragon(): appends an undead dragon to the army
+                
     -getRandomBattalionIndex(): returns a random battalion from an army
     
-    -orderBattalion(): orders the battalions by its strength 
+    -getBattalionIndexByID(): returns the index of a battalion by using its ID
     
-    -getArmyFromLocation(): returns the location of an army during the turns
+    -removeDeadBattalions(): quits the battalions that are empty
     
+    -getQueenAndRemove(): sets the queen as a general in the army
+    
+    -getBattalionsFromLocation(): returns all the battalion the are located in a given position
+    
+    -getRandomBattalions(): returns battalion randomly choosen
+            
     -appendBattalion(): property that adds the created battalion into the set of battalions
-
+    
+    -emptyLocationsFromAllBattalions(): clears the location of all the Battalions. Usefull in Targaryen Army
         
 """
 from undeadKing import UndeadKing
