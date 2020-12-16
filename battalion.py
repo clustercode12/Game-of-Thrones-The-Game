@@ -17,22 +17,30 @@ Methods:
     
     -__init__(): creates a battalion given the type of soldier and the number of them
     
-    -createSoldiers(): Adds new soldiers setting their properties according to the type
-    
     -__str__(): returns a string with the Battalion soldiers, location and general
     
-    -updateStrengthSoldier(): If there is a general, adds the proper strength to the current soldier
+    -createSoldiers(): Adds new soldiers setting their properties according to the type
     
-    -setRandomLocation(): sets the battalion in a random location
+    -removeDeadSoldiers(): pops the soldiers which strength is equal to zero
+    
+    -getRandomLocation(): returns a location that has been choosen randomly
     
     -isHumanBattalion(): boolen True returned if the battalion is composed by humans
     
     -isUndeadBattalion(): boolen True returned if the battalion is composed by undeads
     
-    -emptyLocation(): cleans the location of the battalions. Usefull in Targaryen´s Army
+    -getRandomSoldierOrGeneral(): returns a soldier with the adecuate strength
     
-    -totalSoldierStrength(): property that returns the total strenght of all the members in the battalion
-
+    -getBoostStrengthForSoldiers(): adds the queen boost to the soldiers in the battalion
+    
+    -totalStrength(): returns the strength of a battalion
+    
+    -soldierType(): type of soldier if there is any
+    
+    -soldiersAndGeneralSize(): length of the soldiers and general in a battalion
+    
+    -increaseSoldierStrength(): increases the strength of all the soldiers in a given value
+    
 """
 
 from soldier import Soldier
@@ -173,6 +181,7 @@ class Battalion():
     def isEmpty(self):
         return self.soldiersAndGeneralSize == 0
 
+    #setters
     @soldiers.setter
     def soldiers(self, value):
         self.__soldiers = value
