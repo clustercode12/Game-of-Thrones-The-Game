@@ -17,6 +17,8 @@ Methods:
     
     -boostedStrength(): refers the strength of the soldier boosted by a battalion general
     
+    -IsDead(): Allows to know if the soldier´s strength is 0 or lower, is dead
+    
 """
 
 import random

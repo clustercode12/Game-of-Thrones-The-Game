@@ -7,7 +7,7 @@ Attributes:
     
     -DEFENSOR_ARMY: Westero´s Army, the one defending
     
-    -ATTACK_MODE: Full or partial, is how the player wants to attack
+    -ATTACK_MODE: Full or partial, refers how the player wants to attack
     
     -LOCATION: The place where the battle in this turn will take place
     
@@ -16,12 +16,25 @@ Methods:
     
     -__init__(): creates the wave taking into account the user inputs such as the type of attack 
     or the queenAssignment
+                    
+    -attack(): composes the attack. Uses more methods explained below to get the attack done properly
     
-    -__str__():
-        
-    -assignQueenToBattalion(): sets the queen as a general in the chosen battalion upgrading it
+    -runWaves(): another complex method that consist in getting soldiers figthing each other
     
-    -selectRandomArmy(): chooses a random army with battalions left
+    -configureWinnerBattalionAfterFight(): boosts the battalion that won the round, upgrading humans,
+    Queen and undeads.
+    
+    -getWinnerBattalion(): returns who is the winner in the turn
+    
+    -hasFinished(): boolean method which allows to know that battalions are empty, battle has ended
+    
+    -getRandomAttackerSoldier(): returns a soldier capable of figthing
+    
+    -getAttackerBattalions(): returns the battalions that are going to figth
+    
+    -getRandomDefensorBattalion(): returns a defensor battalion randomly
+    
+    -orderBattalions(): sorts a battalion in function of the strength of its soldiers, is reversible
 
 """
 from waves import Wave
