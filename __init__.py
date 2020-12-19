@@ -118,7 +118,7 @@ print(Dict.DEFEATED,defeated.name)
 armyProps(defeated)
 
 
-    
+print(turn1.attackerArmy) 
 # =============================================================================
 # 
 # targaryenArmy = Army(Dict.TARGARYEN_ARMY)
