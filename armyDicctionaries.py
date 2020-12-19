@@ -62,6 +62,12 @@ ATTACK_TYPE = "Do you want to do Full Attack or Partial Attack?: "
 TARGET_LOCATION = ("Where do you want to attack?: ",LOCATIONS,)
 ATTACK_ORDER = "None"
 ATTACK_ORDER_TYPE = ("Do you want to attack starting with the strongest battalion first or the weakest first? (Strongest First/ Weakest First): ")
+BATTLE_LOCATION = "\nBattle location:"
+WINNER = "\tWinner:"
+DEFEATED = "\n\tDefeated:"
+BATTALION = "\t\tBattalion:"
+STRENGTH = "\n\t\tStrength:"
+LEADER = "\n\t\tLeader:"
 
 TARGARYEN_ARMY = {
     NAME: TARGARYEN,
