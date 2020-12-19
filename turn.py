@@ -15,7 +15,7 @@ Attributes:
 Methods:
     
     -__init__(): creates the turn taking into account the user inputs such as the type of attack 
-    or the queenAssignment
+    or the queen Assignment
                     
     -attack(): composes the attack. Uses more methods explained below to get the attack done properly
     
