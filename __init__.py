@@ -65,7 +65,7 @@ def typeOfSoldiersInBattalion(army):
     soldier = ""
     for i in range(len(army.battalions)):
         if (army.battalions[i].soldierType) != None:
-            if (army.battalions[i].soldierType) not in soldier:
+            if (army.battalions[i].soldierType) not in soldier and ((army.battalions[i].soldierType) != "no soldiers"):
                 soldier += " "
                 soldier += (army.battalions[i].soldierType)
     return soldier
@@ -106,7 +106,7 @@ print(Dict.INTRODUCTION)
 targaryenArmy = Army(Dict.TARGARYEN_ARMY)
 westerosArmy = Army(Dict.WESTEROS_ARMY)
 
-turn1 = Turn(targaryenArmy, westerosArmy, True, 10, Dict.STRONGEST_FIRST, Dict.PARTIAL_ATTACK, Dict.SUNSPEAR)#turnSettings()
+turn1 = Turn(targaryenArmy, westerosArmy, False, 10, Dict.STRONGEST_FIRST, Dict.PARTIAL_ATTACK, Dict.SUNSPEAR)#turnSettings()
 
 winner = (turn1.getWinnerBattalion(targaryenArmy,westerosArmy))
 defeated = defeatedArmyName(turn1)
@@ -118,7 +118,6 @@ print(Dict.DEFEATED,defeated.name)
 armyProps(defeated)
 
 
-print(turn1.attackerArmy) 
 # =============================================================================
 # 
 # targaryenArmy = Army(Dict.TARGARYEN_ARMY)
